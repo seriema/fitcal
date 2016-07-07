@@ -1554,6 +1554,11 @@
       "from": "passport-oauth2@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/passport-oauth2/-/passport-oauth2-1.3.0.tgz"
     },
+    "passport-oauth2-refresh": {
+      "version": "1.0.0",
+      "from": "passport-oauth2-refresh@latest",
+      "resolved": "https://registry.npmjs.org/passport-oauth2-refresh/-/passport-oauth2-refresh-1.0.0.tgz"
+    },
     "passport-strategy": {
       "version": "1.0.0",
       "from": "passport-strategy@>=1.0.0 <2.0.0",
