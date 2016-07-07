@@ -6,18 +6,18 @@
     "start": "node server"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
-    "everyauth": "https://github.com/bnoguchi/everyauth/tarball/express3",
+    "ejs": "^2.4.2",
     "express": "^4.14.0",
     "express-session": "^1.14.0",
-    "jade": "*",
-    "less-middleware": "*",
-    "mongodb": "^2.1.18",
-    "nconf": "~0.6.7",
+    "mongoose": "^4.5.3",
+    "morgan": "^1.7.0",
     "passport": "^0.3.2",
-    "recaptcha": "~1.2.0",
-    "socket.io": "~0.9.13"
+    "passport-facebook": "^2.1.1",
+    "passport-local": "^1.0.0"
   },
   "noAnalyze": true,
   "license": "Apache",
