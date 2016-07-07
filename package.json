@@ -13,16 +13,20 @@
     "ejs": "^2.4.2",
     "express": "^4.14.0",
     "express-session": "^1.14.0",
+    "moment-timezone": "^0.5.4",
     "mongoose": "^4.5.3",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-fitbit-oauth2": "^1.0.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "q": "^1.4.1",
+    "request": "^2.72.0",
+    "simple-oauth2": "^0.7.0"
   },
   "noAnalyze": true,
   "license": "Apache",
   "engines": {
-    "node": "~0.10.0 || ~0.12.0 || ~4.2.0"
+    "node": "~6.0.0"
   }
 }
