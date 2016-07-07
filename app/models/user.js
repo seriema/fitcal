@@ -14,6 +14,11 @@ var userSchema = mongoose.Schema({
         email        : String,
         name         : String
     },
+    fitbit           : {
+        id           : String,
+        token        : String,
+        name         : String
+    },
     twitter          : {
         id           : String,
         token        : String,

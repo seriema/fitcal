@@ -1,5 +1,6 @@
 var LocalStrategy   = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var FitbitStrategy = require( 'passport-fitbit-oauth2' ).FitbitOAuth2Strategy;
 
 // load up the user model
 var User            = require('../app/models/user');
@@ -193,4 +194,78 @@ module.exports = function(passport) {
 
     }));
 
+
+    // =========================================================================
+    // FITBIT STRATEGY =========================================================
+    // =========================================================================
+
+    passport.use(new FitbitStrategy({
+            clientID        : configAuth.fitbitAuth.clientID,
+            clientSecret    : configAuth.fitbitAuth.clientSecret,
+          	callbackURL     : configAuth.fitbitAuth.callbackURL,
+            passReqToCallback : true // allows us to pass in the req from our route (let's us check if a user is logged in or not)
+        },
+        function(req, token, refreshToken, profile, done) {
+
+          // asynchronous
+          process.nextTick(function() {
+
+            // check if the user is already logged in
+            if (!req.user) {
+
+                // find the user in the database based on their fitbit id
+                User.findOne({ 'fitbit.id' : profile.id }, function(err, user) {
+
+                    // if there is an error, stop everything and return that
+                    // ie an error connecting to the database
+                    if (err)
+                        return done(err);
+
+                    // if the user is found, then log them in
+                    if (user) {
+                        return done(null, user); // user found, return that user
+                    } else {
+                        // if there is no user found with that fitbit id, create them
+                        var newUser            = new User();
+
+                        // set all of the fitbit information in our user model
+                        newUser.fitbit.id    = profile.id; // set the users fitbit id
+                        newUser.fitbit.token = token; // we will save the token that fitbit provides to the user
+                        newUser.fitbit.name  = profile.displayName; // look at the passport user profile to see how names are returned
+
+                        // save our user to the database
+                        newUser.save(function(err) {
+                            if (err)
+                                throw err;
+
+                            // if successful, return the new user
+                            return done(null, newUser);
+                        });
+                    }
+
+                });
+
+            } else {
+
+                // user already exists and is logged in, we have to link accounts
+                var user            = req.user; // pull the user out of the session
+
+                // update the current users fitbit credentials
+                user.fitbit.id    = profile.id; // set the users fitbit id
+                user.fitbit.token = token; // we will save the token that fitbit provides to the user
+                user.fitbit.name  = profile.displayName; // look at the passport user profile to see how names are returned
+
+                // save the user
+                user.save(function(err) {
+                  if (err)
+                      throw err;
+                  return done(null, user);
+                });
+
+              }
+          });
+
+
+        })
+    );
 };
