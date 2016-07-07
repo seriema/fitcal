@@ -101,6 +101,22 @@ module.exports = function(app, passport) {
         }
     );
 
+  // fitbit -------------------------------
+
+    // =====================================
+    // FITBIT ROUTES =====================
+    // =====================================
+    // route for facebook authentication and login
+    app.get('/auth/fitbit', passport.authenticate('fitbit', {  scope : ['activity', 'heartrate', 'profile', 'sleep', 'weight'] }));
+
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/fitbit/callback',
+        passport.authenticate('fitbit', {
+            successRedirect : '/profile',
+            failureRedirect : '/'
+        })
+    );
+
 // =============================================================================
 // AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
 // =============================================================================
@@ -122,6 +138,18 @@ module.exports = function(app, passport) {
     // handle the callback after facebook has authorized the user
     app.get('/connect/facebook/callback',
         passport.authorize('facebook', {
+            successRedirect : '/profile',
+            failureRedirect : '/'
+        })
+    );
+
+  // fitbit -------------------------------
+    // send to fitbit to do the authentication
+    app.get('/connect/fitbit', passport.authorize('fitbit', {  scope : ['activity', 'heartrate', 'profile', 'sleep', 'weight'] }));
+
+    // handle the callback after fitbit has authorized the user
+    app.get('/connect/fitbit/callback',
+        passport.authorize('fitbit', {
             successRedirect : '/profile',
             failureRedirect : '/'
         })
@@ -149,6 +177,15 @@ module.exports = function(app, passport) {
     app.get('/unlink/facebook', function(req, res) {
         var user            = req.user;
         user.facebook.token = undefined;
+        user.save(function(err) {
+            res.redirect('/profile');
+        });
+    });
+
+  // fitbit -------------------------------
+    app.get('/unlink/fitbit', function(req, res) {
+        var user            = req.user;
+        user.fitbit.token   = undefined;
         user.save(function(err) {
             res.redirect('/profile');
         });

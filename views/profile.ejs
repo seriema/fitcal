@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <style>
         body        { padding-top:80px; word-wrap:break-word; }
     </style>
@@ -55,6 +55,27 @@
                     <a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
                 <% } else { %>
                     <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
+                <% } %>
+
+            </div>
+        </div>
+
+        <!-- FITBIT INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3 class="text-primary"><span class="fa fa-heartbeat"></span> Fitbit</h3>
+
+                <!-- check if the user has this token (is the user authenticated with this social account) -->
+                <% if (user.fitbit.token) { %>
+                    <p>
+                        <strong>id</strong>: <%= user.fitbit.id %><br>
+                        <strong>token</strong>: <%= user.fitbit.token %><br>
+                        <strong>name</strong>: <%= user.fitbit.name %><br>
+                    </p>
+
+                    <a href="/unlink/fitbit" class="btn btn-primary">Unlink</a>
+                <% } else { %>
+                    <a href="/connect/fitbit" class="btn btn-primary">Connect Fitbit</a>
                 <% } %>
 
             </div>
