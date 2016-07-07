@@ -1,0 +1,750 @@
+{
+  "2016-07-06": {
+    "activityName": "Workout",
+    "averageHeartRate": 107,
+    "calories": 255,
+    "steps": 1099,
+    "duration": "PT55M54S",
+    "start": "2016-07-06T05:12:07.000Z",
+    "stop": "2016-07-06T06:08:01.000Z",
+    "original": {
+      "activeDuration": 3354000,
+      "activityLevel": [
+        {
+          "minutes": 9,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 43,
+          "name": "lightly"
+        },
+        {
+          "minutes": 3,
+          "name": "fairly"
+        },
+        {
+          "minutes": 0,
+          "name": "very"
+        }
+      ],
+      "activityName": "Workout",
+      "activityTypeId": 3000,
+      "averageHeartRate": 107,
+      "calories": 255,
+      "duration": 3354000,
+      "heartRateLink": "https://api.fitbit.com/1/user/-/activities/heart/date/2016-07-06/2016-07-06/1sec/time/07:12:07/08:08:01.json",
+      "heartRateZones": [
+        {
+          "max": 93,
+          "min": 30,
+          "minutes": 8,
+          "name": "Out of Range"
+        },
+        {
+          "max": 130,
+          "min": 93,
+          "minutes": 48,
+          "name": "Fat Burn"
+        },
+        {
+          "max": 158,
+          "min": 130,
+          "minutes": 0,
+          "name": "Cardio"
+        },
+        {
+          "max": 220,
+          "min": 158,
+          "minutes": 0,
+          "name": "Peak"
+        }
+      ],
+      "lastModified": "2016-07-06T06:36:05.000Z",
+      "logId": 3207469353,
+      "logType": "tracker",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "source": {
+        "id": "61941716",
+        "name": "Charge HR",
+        "type": "tracker",
+        "url": "https://www.fitbit.com/"
+      },
+      "startTime": "2016-07-06T07:12:07.000+02:00",
+      "steps": 1099,
+      "tcxLink": "https://api.fitbit.com/1/user/-/activities/3207469353.tcx"
+    }
+  },
+  "2016-07-04": {
+    "activityName": "Walk",
+    "averageHeartRate": 108,
+    "calories": 114,
+    "steps": 1496,
+    "duration": "PT15M36S",
+    "start": "2016-07-04T05:13:41.000Z",
+    "stop": "2016-07-04T05:29:17.000Z",
+    "original": {
+      "activeDuration": 936000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 0,
+          "name": "lightly"
+        },
+        {
+          "minutes": 6,
+          "name": "fairly"
+        },
+        {
+          "minutes": 10,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "averageHeartRate": 108,
+      "calories": 114,
+      "duration": 936000,
+      "heartRateLink": "https://api.fitbit.com/1/user/-/activities/heart/date/2016-07-04/2016-07-04/1sec/time/07:13:41/07:29:17.json",
+      "heartRateZones": [
+        {
+          "max": 93,
+          "min": 30,
+          "minutes": 0,
+          "name": "Out of Range"
+        },
+        {
+          "max": 130,
+          "min": 93,
+          "minutes": 16,
+          "name": "Fat Burn"
+        },
+        {
+          "max": 158,
+          "min": 130,
+          "minutes": 0,
+          "name": "Cardio"
+        },
+        {
+          "max": 220,
+          "min": 158,
+          "minutes": 0,
+          "name": "Peak"
+        }
+      ],
+      "lastModified": "2016-07-04T05:47:01.000Z",
+      "logId": 3184518292,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "startTime": "2016-07-04T07:13:41.000+02:00",
+      "steps": 1496,
+      "tcxLink": "https://api.fitbit.com/1/user/-/activities/3184518292.tcx"
+    }
+  },
+  "2016-07-03": {
+    "activityName": "Walk",
+    "averageHeartRate": 110,
+    "calories": 267,
+    "steps": 3495,
+    "duration": "PT38M9S",
+    "start": "2016-07-03T10:42:50.000Z",
+    "stop": "2016-07-03T11:20:59.000Z",
+    "original": {
+      "activeDuration": 2289000,
+      "activityLevel": [
+        {
+          "minutes": 1,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 2,
+          "name": "lightly"
+        },
+        {
+          "minutes": 5,
+          "name": "fairly"
+        },
+        {
+          "minutes": 30,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "averageHeartRate": 110,
+      "calories": 267,
+      "duration": 2289000,
+      "heartRateLink": "https://api.fitbit.com/1/user/-/activities/heart/date/2016-07-03/2016-07-03/1sec/time/12:42:50/13:20:59.json",
+      "heartRateZones": [
+        {
+          "max": 93,
+          "min": 30,
+          "minutes": 0,
+          "name": "Out of Range"
+        },
+        {
+          "max": 130,
+          "min": 93,
+          "minutes": 38,
+          "name": "Fat Burn"
+        },
+        {
+          "max": 158,
+          "min": 130,
+          "minutes": 0,
+          "name": "Cardio"
+        },
+        {
+          "max": 220,
+          "min": 158,
+          "minutes": 0,
+          "name": "Peak"
+        }
+      ],
+      "lastModified": "2016-07-03T11:35:26.000Z",
+      "logId": 3176304063,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "startTime": "2016-07-03T12:42:50.000+02:00",
+      "steps": 3495,
+      "tcxLink": "https://api.fitbit.com/1/user/-/activities/3176304063.tcx"
+    }
+  },
+  "2016-07-02": {
+    "activityName": "Walk",
+    "averageHeartRate": 108,
+    "calories": 111,
+    "steps": 1284,
+    "duration": "PT16M30S",
+    "start": "2016-07-02T06:06:51.000Z",
+    "stop": "2016-07-02T06:23:21.000Z",
+    "original": {
+      "activeDuration": 990000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 2,
+          "name": "lightly"
+        },
+        {
+          "minutes": 10,
+          "name": "fairly"
+        },
+        {
+          "minutes": 5,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "averageHeartRate": 108,
+      "calories": 111,
+      "duration": 990000,
+      "heartRateLink": "https://api.fitbit.com/1/user/-/activities/heart/date/2016-07-02/2016-07-02/1sec/time/08:06:51/08:23:21.json",
+      "heartRateZones": [
+        {
+          "max": 93,
+          "min": 30,
+          "minutes": 0,
+          "name": "Out of Range"
+        },
+        {
+          "max": 130,
+          "min": 93,
+          "minutes": 17,
+          "name": "Fat Burn"
+        },
+        {
+          "max": 158,
+          "min": 130,
+          "minutes": 0,
+          "name": "Cardio"
+        },
+        {
+          "max": 220,
+          "min": 158,
+          "minutes": 0,
+          "name": "Peak"
+        }
+      ],
+      "lastModified": "2016-07-02T06:30:33.000Z",
+      "logId": 3165240059,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "startTime": "2016-07-02T08:06:51.000+02:00",
+      "steps": 1284,
+      "tcxLink": "https://api.fitbit.com/1/user/-/activities/3165240059.tcx"
+    }
+  },
+  "2016-07-01": {
+    "activityName": "Walk",
+    "averageHeartRate": 97,
+    "calories": 93,
+    "steps": 1022,
+    "duration": "PT16M27S",
+    "start": "2016-07-01T17:28:40.000Z",
+    "stop": "2016-07-01T17:45:07.000Z",
+    "original": {
+      "activeDuration": 987000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 6,
+          "name": "lightly"
+        },
+        {
+          "minutes": 7,
+          "name": "fairly"
+        },
+        {
+          "minutes": 3,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "averageHeartRate": 97,
+      "calories": 93,
+      "duration": 987000,
+      "heartRateLink": "https://api.fitbit.com/1/user/-/activities/heart/date/2016-07-01/2016-07-01/1sec/time/19:28:40/19:45:07.json",
+      "heartRateZones": [
+        {
+          "max": 93,
+          "min": 30,
+          "minutes": 5,
+          "name": "Out of Range"
+        },
+        {
+          "max": 130,
+          "min": 93,
+          "minutes": 12,
+          "name": "Fat Burn"
+        },
+        {
+          "max": 158,
+          "min": 130,
+          "minutes": 0,
+          "name": "Cardio"
+        },
+        {
+          "max": 220,
+          "min": 158,
+          "minutes": 0,
+          "name": "Peak"
+        }
+      ],
+      "lastModified": "2016-07-01T17:58:09.000Z",
+      "logId": 3159783919,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "startTime": "2016-07-01T19:28:40.000+02:00",
+      "steps": 1022,
+      "tcxLink": "https://api.fitbit.com/1/user/-/activities/3159783919.tcx"
+    }
+  },
+  "2016-06-30": {
+    "activityName": "Workout",
+    "averageHeartRate": 108,
+    "calories": 193,
+    "steps": 742,
+    "duration": "PT39M49S",
+    "start": "2016-06-30T05:14:17.000Z",
+    "stop": "2016-06-30T05:54:06.000Z",
+    "original": {
+      "activeDuration": 2389000,
+      "activityLevel": [
+        {
+          "minutes": 2,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 24,
+          "name": "lightly"
+        },
+        {
+          "minutes": 11,
+          "name": "fairly"
+        },
+        {
+          "minutes": 2,
+          "name": "very"
+        }
+      ],
+      "activityName": "Workout",
+      "activityTypeId": 3000,
+      "averageHeartRate": 108,
+      "calories": 193,
+      "duration": 2389000,
+      "heartRateLink": "https://api.fitbit.com/1/user/-/activities/heart/date/2016-06-30/2016-06-30/1sec/time/07:14:17/07:54:06.json",
+      "heartRateZones": [
+        {
+          "max": 93,
+          "min": 30,
+          "minutes": 6,
+          "name": "Out of Range"
+        },
+        {
+          "max": 130,
+          "min": 93,
+          "minutes": 32,
+          "name": "Fat Burn"
+        },
+        {
+          "max": 158,
+          "min": 130,
+          "minutes": 2,
+          "name": "Cardio"
+        },
+        {
+          "max": 220,
+          "min": 158,
+          "minutes": 0,
+          "name": "Peak"
+        }
+      ],
+      "lastModified": "2016-06-30T06:04:03.000Z",
+      "logId": 3140507256,
+      "logType": "tracker",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "source": {
+        "id": "61941716",
+        "name": "Charge HR",
+        "type": "tracker",
+        "url": "https://www.fitbit.com/"
+      },
+      "startTime": "2016-06-30T07:14:17.000+02:00",
+      "steps": 742,
+      "tcxLink": "https://api.fitbit.com/1/user/-/activities/3140507256.tcx"
+    }
+  },
+  "2016-06-29": {
+    "activityName": "Walk",
+    "averageHeartRate": 117,
+    "calories": 166,
+    "steps": 1920,
+    "duration": "PT22M32S",
+    "start": "2016-06-29T06:32:47.000Z",
+    "stop": "2016-06-29T06:55:19.000Z",
+    "original": {
+      "activeDuration": 1352000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 4,
+          "name": "lightly"
+        },
+        {
+          "minutes": 5,
+          "name": "fairly"
+        },
+        {
+          "minutes": 14,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "averageHeartRate": 117,
+      "calories": 166,
+      "duration": 1352000,
+      "heartRateLink": "https://api.fitbit.com/1/user/-/activities/heart/date/2016-06-29/2016-06-29/1sec/time/08:32:47/08:55:19.json",
+      "heartRateZones": [
+        {
+          "max": 93,
+          "min": 30,
+          "minutes": 0,
+          "name": "Out of Range"
+        },
+        {
+          "max": 130,
+          "min": 93,
+          "minutes": 22,
+          "name": "Fat Burn"
+        },
+        {
+          "max": 158,
+          "min": 130,
+          "minutes": 1,
+          "name": "Cardio"
+        },
+        {
+          "max": 220,
+          "min": 158,
+          "minutes": 0,
+          "name": "Peak"
+        }
+      ],
+      "lastModified": "2016-06-29T20:34:40.000Z",
+      "logId": 3137201892,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "startTime": "2016-06-29T08:32:47.000+02:00",
+      "steps": 1920,
+      "tcxLink": "https://api.fitbit.com/1/user/-/activities/3137201892.tcx"
+    }
+  },
+  "2016-06-28": {
+    "activityName": "Workout",
+    "averageHeartRate": 104,
+    "calories": 193,
+    "steps": 886,
+    "duration": "PT42M22S",
+    "start": "2016-06-28T05:06:47.000Z",
+    "stop": "2016-06-28T05:49:09.000Z",
+    "original": {
+      "activeDuration": 2542000,
+      "activityLevel": [
+        {
+          "minutes": 5,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 23,
+          "name": "lightly"
+        },
+        {
+          "minutes": 13,
+          "name": "fairly"
+        },
+        {
+          "minutes": 1,
+          "name": "very"
+        }
+      ],
+      "activityName": "Workout",
+      "activityTypeId": 3000,
+      "averageHeartRate": 104,
+      "calories": 193,
+      "duration": 2542000,
+      "heartRateLink": "https://api.fitbit.com/1/user/-/activities/heart/date/2016-06-28/2016-06-28/1sec/time/07:06:47/07:49:09.json",
+      "heartRateZones": [
+        {
+          "max": 93,
+          "min": 30,
+          "minutes": 13,
+          "name": "Out of Range"
+        },
+        {
+          "max": 130,
+          "min": 93,
+          "minutes": 29,
+          "name": "Fat Burn"
+        },
+        {
+          "max": 158,
+          "min": 130,
+          "minutes": 1,
+          "name": "Cardio"
+        },
+        {
+          "max": 220,
+          "min": 158,
+          "minutes": 0,
+          "name": "Peak"
+        }
+      ],
+      "lastModified": "2016-06-28T05:50:15.000Z",
+      "logId": 3115424989,
+      "logType": "tracker",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "source": {
+        "id": "61941716",
+        "name": "Charge HR",
+        "type": "tracker",
+        "url": "https://www.fitbit.com/"
+      },
+      "startTime": "2016-06-28T07:06:47.000+02:00",
+      "steps": 886,
+      "tcxLink": "https://api.fitbit.com/1/user/-/activities/3115424989.tcx"
+    }
+  },
+  "2016-06-27": {
+    "activityName": "Walk",
+    "averageHeartRate": 117,
+    "calories": 135,
+    "steps": 1710,
+    "duration": "PT18M14S",
+    "start": "2016-06-27T05:05:04.000Z",
+    "stop": "2016-06-27T05:23:18.000Z",
+    "original": {
+      "activeDuration": 1094000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 1,
+          "name": "lightly"
+        },
+        {
+          "minutes": 4,
+          "name": "fairly"
+        },
+        {
+          "minutes": 13,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "averageHeartRate": 117,
+      "calories": 135,
+      "duration": 1094000,
+      "heartRateLink": "https://api.fitbit.com/1/user/-/activities/heart/date/2016-06-27/2016-06-27/1sec/time/07:05:04/07:23:18.json",
+      "heartRateZones": [
+        {
+          "max": 93,
+          "min": 30,
+          "minutes": 0,
+          "name": "Out of Range"
+        },
+        {
+          "max": 130,
+          "min": 93,
+          "minutes": 18,
+          "name": "Fat Burn"
+        },
+        {
+          "max": 158,
+          "min": 130,
+          "minutes": 0,
+          "name": "Cardio"
+        },
+        {
+          "max": 220,
+          "min": 158,
+          "minutes": 0,
+          "name": "Peak"
+        }
+      ],
+      "lastModified": "2016-06-27T05:26:42.000Z",
+      "logId": 3102281803,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "startTime": "2016-06-27T07:05:04.000+02:00",
+      "steps": 1710,
+      "tcxLink": "https://api.fitbit.com/1/user/-/activities/3102281803.tcx"
+    }
+  },
+  "2016-06-26": {
+    "activityName": "Walk",
+    "averageHeartRate": 112,
+    "calories": 111,
+    "steps": 1472,
+    "duration": "PT15M35S",
+    "start": "2016-06-26T07:06:35.000Z",
+    "stop": "2016-06-26T07:22:10.000Z",
+    "original": {
+      "activeDuration": 935000,
+      "activityLevel": [
+        {
+          "minutes": 0,
+          "name": "sedentary"
+        },
+        {
+          "minutes": 4,
+          "name": "lightly"
+        },
+        {
+          "minutes": 2,
+          "name": "fairly"
+        },
+        {
+          "minutes": 10,
+          "name": "very"
+        }
+      ],
+      "activityName": "Walk",
+      "activityTypeId": 90013,
+      "averageHeartRate": 112,
+      "calories": 111,
+      "duration": 935000,
+      "heartRateLink": "https://api.fitbit.com/1/user/-/activities/heart/date/2016-06-26/2016-06-26/1sec/time/09:06:35/09:22:10.json",
+      "heartRateZones": [
+        {
+          "max": 93,
+          "min": 30,
+          "minutes": 0,
+          "name": "Out of Range"
+        },
+        {
+          "max": 130,
+          "min": 93,
+          "minutes": 16,
+          "name": "Fat Burn"
+        },
+        {
+          "max": 158,
+          "min": 130,
+          "minutes": 0,
+          "name": "Cardio"
+        },
+        {
+          "max": 220,
+          "min": 158,
+          "minutes": 0,
+          "name": "Peak"
+        }
+      ],
+      "lastModified": "2016-06-26T07:31:03.000Z",
+      "logId": 3093247545,
+      "logType": "auto_detected",
+      "manualValuesSpecified": {
+        "calories": false,
+        "distance": false,
+        "steps": false
+      },
+      "startTime": "2016-06-26T09:06:35.000+02:00",
+      "steps": 1472,
+      "tcxLink": "https://api.fitbit.com/1/user/-/activities/3093247545.tcx"
+    }
+  }
+}
