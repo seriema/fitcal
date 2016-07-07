@@ -53,6 +53,39 @@ module.exports = function(app, passport) {
     });
 
     // =====================================
+    // FACEBOOK ROUTES =====================
+    // =====================================
+    // route for facebook authentication and login
+    app.get('/auth/facebook', passport.authenticate('facebook', {  authType: 'rerequest', scope : ['email'] }));
+
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect : '/profile',
+            failureRedirect : '/'
+        }),
+
+        // on succes
+        function(req,res) {
+           // return the token or you would wish otherwise give eg. a succes message
+           //res.render('json', {data: JSON.stringify(req.user.access_token)});
+           res.status(200);
+           res.route('/profile');
+        },
+
+        // on error; likely to be something FacebookTokenError token invalid or already used token,
+        // these errors occur when the user logs in twice with the same token
+        function(err,req,res,next) {
+            // You could put your own behavior in here, fx: you could force auth again...
+            // res.redirect('/auth/facebook/');
+            if(err) {
+                res.status(400);
+                res.render('error', {message: err.message});
+            }
+        }
+    );
+
+    // =====================================
     // LOGOUT ==============================
     // =====================================
     app.get('/logout', function(req, res) {
