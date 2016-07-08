@@ -1,14 +1,15 @@
 var mongoose = require('mongoose');
 var moment = require('moment-timezone');
-const TIMEZONE = 'Europe/Stockholm';
+const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
+const DATEFORMAT = 'YYYY-MM-DD';
 
 var sleepSchema = mongoose.Schema({
 
     fitbit              : {
         id              : String
     },
-    dateTime            : String, // ID
-    raw                 : {
+    dateTime            : String, // ID // TODO: Should specify the format somewhere? For easy parsing with momentjs
+    raw                 : { // TODO: Call this fitbit.raw?
         startTime           : String,
         timeInBed           : String,
         minutesAsleep       : String,
@@ -20,9 +21,6 @@ var sleepSchema = mongoose.Schema({
     }
 });
 
-// create the model for users and expose it to our app
-module.exports = mongoose.model('Sleep', sleepSchema);
-
 // methods ======================
 function getNumber(value) {
     if (value === "0" || !value)
@@ -31,28 +29,34 @@ function getNumber(value) {
     return parseInt(value, 10);
 }
 
-
-/* "dateTime": "2015-10-22", "value": "01:13" */
+// Convenience methods for the calendar export.
 sleepSchema.methods.start = function () {
-    var value = this.raw.startTime;
+    /* "dateTime": "2015-10-22", "value": "01:13" */
+    var value = this.raw.startTime; // TODO: Use virtual?
     if (!value)
         return null; // Fitbit spams the logs with no data
 
-    var hourMinute = value.split(':');
+    // TODO: Should probably add minutesToFallAsleep?
+    var format = DATEFORMAT + '_' + 'hh:mm'; // Assuming Fitbit uses AM/PM, so it's 'hh'. For 24h time use 'HH'.
+    var dateString = this.dateTime + '_' + value;
+    var date = moment.tz(dateString, format, TIMEZONE);
 
-    var data = new Date(this.raw.dateTime); // TODO: Get a proper moment dateTime? and save it?
-    data.setHours(parseInt(hourMinute[0], 10));
-    data.setMinutes(parseInt(hourMinute[1], 10)); // ignoring "minutesToFallAsleep" for now
-
-    var date = moment.tz(this.raw.dateTime + ' ' + value, TIMEZONE);
-
+    // If we fell asleep after midnight we need to adjust time start time for the calendar.
     if (date.format('A') === 'PM')
         date.subtract(1, 'day');
 
     return date;
 };
 sleepSchema.methods.end = function () {
-    return this.start().clone().add(this.minutesAsleep(), 'minute');
+    var date = this.start().clone().add(this.minutesAsleep, 'minute');
+    return date;
+};
+sleepSchema.methods.summary = function () {
+    var minAsleep = moment.duration(this.minutesAsleep, 'minutes');
+    var awakeCount = this.awakeningsCount === undefined ? 'unknown' : this.awakeningsCount; // 0 is a valid number
+    //var awakeText = this.awakeningsCount === undefined ? '' : `${this.awakeningsCount} times awake`; // 0 is a valid number
+    var text = `Sleep - ${minAsleep.hours()} h ${minAsleep.minutes()} min - ${this.efficiency} % - ${awakeCount} times awake`;
+    return text;
 };
 
 /* "dateTime": "2015-10-22", "value": "280" */
@@ -67,7 +71,7 @@ sleepSchema.virtual('minutesAsleep').get(function () {
 /*sleepSchema.methods.awakeningsCounts = function () {
     return getNumber(this.raw.awakeningsCount);
 };*/
-sleepSchema.virtual('awakeningsCounts').get(function () {
+sleepSchema.virtual('awakeningsCount').get(function () {
     return getNumber(this.raw.awakeningsCount);
 });
 
@@ -135,3 +139,7 @@ sleepSchema.virtual('efficiency').get(function () {
  efficiency      : Number
 
  */
+
+
+// create the model for users and expose it to our app
+module.exports = mongoose.model('Sleep', sleepSchema);

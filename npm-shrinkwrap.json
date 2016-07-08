@@ -353,6 +353,11 @@
       "from": "http-signature@>=1.1.0 <1.2.0",
       "resolved": "https://registry.npmjs.org/http-signature/-/http-signature-1.1.1.tgz"
     },
+    "ical-generator": {
+      "version": "0.2.7",
+      "from": "ical-generator@latest",
+      "resolved": "https://registry.npmjs.org/ical-generator/-/ical-generator-0.2.7.tgz"
+    },
     "iconv-lite": {
       "version": "0.4.13",
       "from": "iconv-lite@0.4.13",
