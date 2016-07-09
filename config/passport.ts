@@ -1,15 +1,18 @@
-var LocalStrategy   = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
-var FitbitStrategy = require( 'passport-fitbit-oauth2' ).FitbitOAuth2Strategy;
+///<reference path="../typings/index.d.ts"/>
+
+import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as FacebookStrategy } from 'passport-facebook';
+//import { Strategy as FitbitStrategy } from 'passport-fitbit-oauth2';
+import FitbitStrategy = require('passport-fitbit-oauth2');
 
 // load up the user model
-var User            = require('../app/models/user');
+import User = require('../app/models/user');
 
 // load the auth variables
 var configAuth = require('./auth');
 
 // expose this function to our app using module.exports
-module.exports = function(passport) {
+export = function(passport) {
 
     // =========================================================================
     // passport session setup ==================================================
