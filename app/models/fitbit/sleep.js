@@ -4,7 +4,6 @@ const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
 const DATEFORMAT = 'YYYY-MM-DD';
 
 var sleepSchema = mongoose.Schema({
-
     fitbit              : {
         id              : String
     },
@@ -142,4 +141,4 @@ sleepSchema.virtual('efficiency').get(function () {
 
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('Sleep', sleepSchema);
+module.exports = mongoose.model('Fitbit.Sleep', sleepSchema);
