@@ -73,7 +73,13 @@
                         <strong>name</strong>: <%= user.fitbit.name %><br>
                     </p>
 
-                    <a href="/unlink/fitbit" class="btn btn-primary">Unlink</a>
+                    <p>
+                        <a href="/import/fitbit" class="btn btn-default">Import data</a>
+                        <a href="/export/calendar" class="btn btn-default">Export calendar</a>
+                    </p>
+                    <p>
+                        <a href="/unlink/fitbit" class="btn btn-primary">Unlink</a>
+                    </p>
                 <% } else { %>
                     <a href="/connect/fitbit" class="btn btn-primary">Connect Fitbit</a>
                 <% } %>
