@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var moment = require('moment-timezone');
+import mongoose = require('mongoose');
+import moment = require('moment-timezone');
 const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
 const DATEFORMAT = 'YYYY-MM-DD';
 

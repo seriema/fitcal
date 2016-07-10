@@ -1,7 +1,7 @@
-var q = require('q');
-var FitbitApiClient = require("./fitbitClient");
-var client = new FitbitApiClient();
-var Sleep = require('../models/fitbit/sleep');
+import q = require('q');
+import FitbitApiClient = require("./fitbitClient");
+let client = new FitbitApiClient();
+import Sleep = require('../models/fitbit/sleep');
 
 
 const resources = {

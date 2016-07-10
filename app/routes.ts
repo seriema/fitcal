@@ -1,6 +1,6 @@
 //var http = require('http');
-var fitbit = require('./api/fitbit');
-var calendar = require('./api/calendar');
+import fitbit = require('./api/fitbit');
+import calendar = require('./api/calendar');
 
 module.exports = function(app, passport) {
 

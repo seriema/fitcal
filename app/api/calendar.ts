@@ -1,8 +1,7 @@
-var ical = require('ical-generator');
-var q = require('q');
-var Sleep = require('../models/fitbit/sleep');
-var siteConfig = require('./../../config/site');
-const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
+import ical = require('ical-generator');
+import q = require('q');
+import Sleep = require('../models/fitbit/sleep');
+import siteConfig = require('./../../config/site');
 
 function getSleep(user) {
     var sleepDeferred = q.defer();
@@ -40,6 +39,8 @@ function getSleep(user) {
 }
 
 function exportSleep(user, res) {
+    const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
+
     // - Setup iCal -
     var cal = ical({
         domain: siteConfig.domain,

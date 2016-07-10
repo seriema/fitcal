@@ -1,5 +1,3 @@
-///<reference path="../typings/index.d.ts"/>
-
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 //import { Strategy as FitbitStrategy } from 'passport-fitbit-oauth2';

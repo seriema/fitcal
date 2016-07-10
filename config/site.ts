@@ -1,5 +1,3 @@
-///<reference path="../typings/index.d.ts"/>
-
 export = {
     name: 'FitCal',
     longName: 'FitCal - Health and fitness tracking; in your calendar',

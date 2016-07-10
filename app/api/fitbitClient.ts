@@ -1,10 +1,10 @@
 // Taken from https://github.com/lukasolson/fitbit-node
 // The idea is to rewrite it to something simpler and more standard.
 
-var OAuth2 = require('simple-oauth2'),
-    Q = require('q'),
-    Request = require('request');
-var configAuth = require('./../../config/auth');
+import OAuth2 = require('simple-oauth2');
+import Q = require('q');
+import Request = require('request');
+import configAuth = require('./../../config/auth');
 
 function FitbitApiClient() {
     this.oauth2 = OAuth2({

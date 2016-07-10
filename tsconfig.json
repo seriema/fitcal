@@ -1,7 +1,11 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
+    "emitBOM": true,
+    "newLine": "lf",
+    "outDir": "built",
     "sourceMap": true
   }
 }

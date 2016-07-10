@@ -24,12 +24,13 @@ let userSchema : mongoose.Schema = new mongoose.Schema({
 
 // methods ======================
 // generating a hash
-userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+userSchema.methods.generateHash = function(password:string) {
+    var salt = bcrypt.genSaltSync(8);
+    return bcrypt.hashSync(password, salt);
 };
 
 // checking if password is valid
-userSchema.methods.validPassword = function(password) {
+userSchema.methods.validPassword = function(password:string) {
     return bcrypt.compareSync(password, this.local.password);
 };
 

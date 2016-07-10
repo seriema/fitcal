@@ -1,18 +1,15 @@
-///<reference path="typings/index.d.ts"/>
-
 import express = require('express');
 var app = express();
 
-import * as mongoose from "mongoose";
-import * as passport from "passport";
-//import * as flash from "connect-flash";
+import mongoose = require("mongoose");
+import passport = require("passport");
 import flash = require("connect-flash");
 var port = process.env.PORT || 8080;
 
-import * as morgan from "morgan";
-import * as cookieParser from "cookie-parser";
-import * as bodyParser from "body-parser";
-import * as session from "express-session";
+import morgan = require("morgan");
+import cookieParser = require("cookie-parser");
+import bodyParser = require("body-parser");
+import session = require("express-session");
 
 import configDB = require("./config/database");
 import configPassport = require('./config/passport');
