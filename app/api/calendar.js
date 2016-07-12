@@ -1,15 +1,15 @@
 var ical = require('ical-generator');
 var q = require('q');
-var Sleep = require('../models/fitbit/sleep');
+var Day = require('../models/fitbit/day');
 var siteConfig = require('./../../config/site');
 const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
 
 function getSleep(user) {
 	var sleepDeferred = q.defer();
 	var query = {
-		'fitbit.id': user.fitbit.id
+		id: user.fitbit.id
 	};
-	Sleep.find(query, function (err, sleepData) {
+	Day.find(query, function (err, sleepData) {
 		// if there is an error, stop everything and return that
 		// i.e. an error connecting to the database
 		if (err)

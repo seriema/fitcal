@@ -1,7 +1,7 @@
 var q = require('q');
 var FitbitApiClient = require("./fitbitClient");
 var client = new FitbitApiClient();
-var Sleep = require('../models/fitbit/sleep');
+var Day = require('../models/fitbit/day');
 
 
 const resources = {
@@ -14,6 +14,9 @@ const resources = {
 		'minutesToFallAsleep',
 		'minutesAfterWakeup',
 		'efficiency'
+	],
+	activities: [
+		'heart'
 	]
 };
 
@@ -22,14 +25,14 @@ const timeSpan = {
 	period: '7d'
 };
 
-function saveSleepDate(userFitbitId, date, data) {
+function saveDay(userFitbitId, day, data) {
 	let categoryDeferred = q.defer();
 	const query = {
-		'fitbit.id': userFitbitId,
-		dateTime: date
+		id: userFitbitId,
+		dateTime: day
 	};
 
-	Sleep.findOne(query, function (err, sleep) {
+	Day.findOne(query, function (err, dataPoint) {
 
 		// if there is an error, stop everything and return that
 		// i.e. an error connecting to the database
@@ -37,19 +40,19 @@ function saveSleepDate(userFitbitId, date, data) {
 			return categoryDeferred.reject(err);
 
 		// if the sleep data is not found, create one
-		if (!sleep) {
-			sleep = new Sleep();
-			sleep.fitbit.id = userFitbitId;
-			sleep.dateTime = date;
+		if (!dataPoint) {
+			dataPoint = new Day();
+			dataPoint.id = userFitbitId;
+			dataPoint.dateTime = day;
 		}
 
 		// add the data we went through all this trouble to get
-		Object.keys(data).forEach(category => {
-			sleep.raw[category] = data[category];
+		Object.keys(data).forEach(scope => {
+			dataPoint[scope] = data[scope];
 		});
 
 		// save the sleep data to the database
-		sleep.save(function (err) {
+		dataPoint.save(function (err) {
 			if (err)
 				return categoryDeferred.reject(err);
 
@@ -62,18 +65,17 @@ function saveSleepDate(userFitbitId, date, data) {
 
 function saveTimeSeries(userFitbitId, userData) {
 	return Object.keys(userData).map(date => {
-		return saveSleepDate(userFitbitId, date, userData[date])
+		return saveDay(userFitbitId, date, userData[date]);
 	});
 }
 
 // TODO: handle various Fitbit return results, like token expired, etc.
-function callFitbit(token, category) {
-	const scope = 'sleep';
+function callFitbit(token, scope, category) {
 	var path = `/${scope}/${category}/date/${timeSpan.baseDate}/${timeSpan.period}.json`;
 	return client.get(path, token).then(function (result) {
-		var data = result[0];
-		if (data.success === false) {
-			let error = data.errors[0];
+		result = result[0];
+		if (result.success === false) {
+			let error = result.errors[0];
 			if (error.errorType === 'expired_token') {
 				throw error; // TODO: Renew the token or something.
 			} else {
@@ -81,10 +83,12 @@ function callFitbit(token, category) {
 			}
 		}
 
+		let data = result[`${scope}-${category}`];
+
 		return {
 			scope,
 			category,
-			data: data[`sleep-${category}`]
+			data
 		};
 	});
 }
@@ -92,34 +96,27 @@ function callFitbit(token, category) {
 function joinTimeSeries(timeSeries) {
 	let dateObjects = {};
 
-	timeSeries.forEach( time => {
-		time.data.forEach( day => {
+	timeSeries.forEach(time => {
+		time.data.forEach(day => {
 			if (!dateObjects[day.dateTime]) {
 				dateObjects[day.dateTime] = {};
+				dateObjects[day.dateTime][time.scope] = {};
+			} else if (!dateObjects[day.dateTime][time.scope]) {
+				dateObjects[day.dateTime][time.scope] = {};
 			}
 
-			dateObjects[day.dateTime][time.category] = day.value;
+			dateObjects[day.dateTime][time.scope][time.category] = day.value;
 		});
 	});
 
 	return dateObjects;
 }
 
-function importSleep(user, res) {
-	function updateCategory(categoryData) {
-		function updateCategoryDate(category, dateData) {
-			var query = {
-				'fitbit.id': user.fitbit.id,
-				dateTime: dateData.dateTime
-			};
-			return saveSleepDate(query, user, dateData, category);
-		}
-
-		var categoryPromises = categoryData.data.map(updateCategoryDate.bind(null, categoryData.category));
-		return q.all(categoryPromises);
-	}
-
-	var fitbitPromises = resources.sleep.map(callFitbit.bind(null, user.fitbit.token));
+function importTimeSeries(user, res) {
+	let scope = 'activities';
+	let fitbitPromises = resources[scope].map(callFitbit.bind(null, user.fitbit.token, scope));
+	scope = 'sleep';
+	fitbitPromises = fitbitPromises.concat(resources[scope].map(callFitbit.bind(null, user.fitbit.token, scope)));
 
 	q.all(fitbitPromises)
 		.then(joinTimeSeries)
@@ -133,5 +130,5 @@ function importSleep(user, res) {
 }
 
 module.exports = {
-	importSleep
+	importTimeSeries
 };
