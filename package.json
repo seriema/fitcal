@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "xo"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -29,5 +30,8 @@
   "license": "Apache",
   "engines": {
     "node": "~6.0.0"
+  },
+  "devDependencies": {
+    "xo": "^0.16.0"
   }
 }
