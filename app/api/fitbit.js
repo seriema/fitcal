@@ -1,7 +1,7 @@
-var q = require('q');
-var FitbitApiClient = require("./fitbitClient");
-var client = new FitbitApiClient();
-var Day = require('../models/fitbit/day');
+let q = require('q');
+let FitbitApiClient = require("./fitbitClient");
+let client = new FitbitApiClient();
+let Day = require('../models/fitbit/day');
 
 
 const resources = {
@@ -89,27 +89,29 @@ function saveTimeSeries(userFitbitId, userData) {
 }
 
 // TODO: handle various Fitbit return results, like token expired, etc.
-function callFitbit(token, scope, category) {
-	var path = `/${scope}/${category}/date/${timeSpan.baseDate}/${timeSpan.period}.json`;
-	return client.get(path, token).then(function (result) {
-		result = result[0];
-		if (result.success === false) {
-			let error = result.errors[0];
-			if (error.errorType === 'expired_token') {
-				throw error; // TODO: Renew the token or something.
-			} else {
-				throw error; // What other errors can I get?
-			}
+function handleFitbitResponse(result, scope, category) {
+	result = result[0];
+	if (result.success === false) {
+		let error = result.errors[0];
+		if (error.errorType === 'expired_token') {
+			throw error; // TODO: Renew the token or something.
+		} else {
+			throw error; // What other errors can I get?
 		}
+	}
 
-		let data = result[`${scope}-${category}`];
+	let data = result[`${scope}-${category}`];
 
-		return {
-			scope,
-			category,
-			data
-		};
-	});
+	return {
+		scope,
+		category,
+		data
+	};
+}
+
+function callFitbit(token, scope, category) {
+	const path = `/${scope}/${category}/date/${timeSpan.baseDate}/${timeSpan.period}.json`;
+	return client.get(path, token);
 }
 
 function joinTimeSeries(timeSeries) {
@@ -135,9 +137,11 @@ function importTimeSeries(user, res) {
 	// Go through all scopes and categories, and flatten the promises.
 	const scopes = Object.keys(resources);
 	let fitbitPromises = scopes.map(scope => {
-		return resources[scope].map(category =>
-			callFitbit(user.fitbit.token, scope, category)
-		);
+		return resources[scope].map(category => {
+			return callFitbit(user.fitbit.token, scope, category).then(result => {
+				return handleFitbitResponse(result, scope, category);
+			});
+		});
 	}).reduce( (a, b) => { // flatten
 		return a.concat(b);
 	}, []);
