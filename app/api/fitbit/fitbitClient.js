@@ -8,8 +8,8 @@ var configAuth = require('./../../../config/auth');
 
 function FitbitApiClient() {
 	this.oauth2 = OAuth2({
-		clientID        : configAuth.fitbitAuth.clientID,
-		clientSecret    : configAuth.fitbitAuth.clientSecret,
+		clientID: configAuth.fitbitAuth.clientID,
+		clientSecret: configAuth.fitbitAuth.clientSecret,
 		site: 'https://api.fitbit.com/',
 		authorizationPath: 'oauth2/authorize',
 		tokenPath: 'oauth2/token',
@@ -72,7 +72,7 @@ FitbitApiClient.prototype = {
 				Authorization: 'Bearer ' + accessToken
 			},
 			json: true
-		}, function(error, response, body) {
+		}, function (error, response, body) {
 			if (error) {
 				deferred.reject(error);
 			} else {
@@ -97,7 +97,7 @@ FitbitApiClient.prototype = {
 			},
 			json: true,
 			body: data
-		}, function(error, response, body) {
+		}, function (error, response, body) {
 			if (error) {
 				deferred.reject(error);
 			} else {
@@ -122,7 +122,7 @@ FitbitApiClient.prototype = {
 			},
 			json: true,
 			body: data
-		}, function(error, response, body) {
+		}, function (error, response, body) {
 			if (error) {
 				deferred.reject(error);
 			} else {
@@ -146,7 +146,7 @@ FitbitApiClient.prototype = {
 				Authorization: 'Bearer ' + accessToken
 			},
 			json: true
-		}, function(error, response, body) {
+		}, function (error, response, body) {
 			if (error) {
 				deferred.reject(error);
 			} else {

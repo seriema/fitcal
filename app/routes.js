@@ -1,32 +1,30 @@
-//var http = require('http');
+// var http = require('http');
 var fitbit = require('./api/fitbit/fitbit');
 var calendar = require('./api/calendar');
 
-module.exports = function(app, passport) {
-
+module.exports = function (app, passport) {
 	// =====================================
 	// HOME PAGE (with login links) ========
 	// =====================================
-	app.get('/', function(req, res) {
+	app.get('/', function (req, res) {
 		res.render('index.ejs'); // load the index.ejs file
 	});
-
 
 	// =====================================
 	// PROFILE SECTION =====================
 	// =====================================
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
-	app.get('/profile', isLoggedIn, function(req, res) {
+	app.get('/profile', isLoggedIn, function (req, res) {
 		res.render('profile.ejs', {
-			user : req.user // get the user out of session and pass to template
+			user: req.user // get the user out of session and pass to template
 		});
 	});
 
 	// =====================================
 	// LOGOUT ==============================
 	// =====================================
-	app.get('/logout', function(req, res) {
+	app.get('/logout', function (req, res) {
 		req.logout();
 		res.redirect('/');
 	});
@@ -34,10 +32,10 @@ module.exports = function(app, passport) {
 	// =====================================
 	// DATA IMPORT SECTION =================
 	// =====================================
-	app.get("/import/fitbit", function (req, res) {
-		var user  = req.user;
+	app.get('/import/fitbit', function (req, res) {
+		var user = req.user;
 		if (!user || !user.fitbit) {
-			return res.render('error.ejs', "You need to be logged in and have linked your account with Fitbit.");
+			return res.render('error.ejs', 'You need to be logged in and have linked your account with Fitbit.');
 		}
 
 		fitbit.importTimeSeries(user, res);
@@ -46,15 +44,14 @@ module.exports = function(app, passport) {
 	// =====================================
 	// CALENDAR EXPORT SECTION =============
 	// =====================================
-	app.get("/export/calendar", function (req, res) {
-		var user  = req.user;
+	app.get('/export/calendar', function (req, res) {
+		var user = req.user;
 		if (!user || !user.fitbit) { // TODO: The request will come from Google Calendar etc so it won't be a logged in user. Generate a unique URL instead?
-			return res.render('error.ejs', "You need to be logged in and have linked your account with Fitbit.");
+			return res.render('error.ejs', 'You need to be logged in and have linked your account with Fitbit.');
 		}
 
 		calendar.generate(user, res);
 	});
-
 
 // =============================================================================
 // AUTHENTICATE (FIRST LOGIN) ==================================================
@@ -66,35 +63,32 @@ module.exports = function(app, passport) {
 	// LOGIN ===============================
 	// =====================================
 	// show the login form
-	app.get('/login', function(req, res) {
-
+	app.get('/login', function (req, res) {
 		// render the page and pass in any flash data if it exists
-		res.render('login.ejs', { message: req.flash('loginMessage') });
+		res.render('login.ejs', {message: req.flash('loginMessage')});
 	});
 
 	// process the login form
 	app.post('/login', passport.authenticate('local-login', {
-		successRedirect : '/profile', // redirect to the secure profile section
-		failureRedirect : '/login', // redirect back to the signup page if there is an error
-		failureFlash : true // allow flash messages
+		successRedirect: '/profile', // redirect to the secure profile section
+		failureRedirect: '/login', // redirect back to the signup page if there is an error
+		failureFlash: true // allow flash messages
 	}));
-
 
 	// =====================================
 	// SIGNUP ==============================
 	// =====================================
 	// show the signup form
-	app.get('/signup', function(req, res) {
-
+	app.get('/signup', function (req, res) {
 		// render the page and pass in any flash data if it exists
-		res.render('signup.ejs', { message: req.flash('signupMessage') });
+		res.render('signup.ejs', {message: req.flash('signupMessage')});
 	});
 
 	// process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect : '/profile', // redirect to the secure profile section
-		failureRedirect : '/signup', // redirect back to the signup page if there is an error
-		failureFlash : true // allow flash messages
+		successRedirect: '/profile', // redirect to the secure profile section
+		failureRedirect: '/signup', // redirect back to the signup page if there is an error
+		failureFlash: true // allow flash messages
 	}));
 
   // facebook -------------------------------
@@ -103,28 +97,28 @@ module.exports = function(app, passport) {
 	// FACEBOOK ROUTES =====================
 	// =====================================
 	// route for facebook authentication and login
-	app.get('/auth/facebook', passport.authenticate('facebook', {  scope : ['email'] }));
+	app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
 	// handle the callback after facebook has authenticated the user
 	app.get('/auth/facebook/callback',
 		passport.authenticate('facebook', {
-			successRedirect : '/profile',
-			failureRedirect : '/'
+			successRedirect: '/profile',
+			failureRedirect: '/'
 		}),
 
 		// Only added the error handling because of: https://github.com/jaredhanson/passport-facebook/issues/93
 		// on succes
-		function(req,res) {
+		function (req, res) {
 			res.status(200);
 			res.route('/profile');
 		},
 
 		// on error; likely to be something FacebookTokenError token invalid or already used token,
 		// these errors occur when the user logs in twice with the same token
-		function(err,req,res,next) {
+		function (err, req, res, next) {
 			// You could put your own behavior in here, fx: you could force auth again...
 			// res.redirect('/auth/facebook/');
-			if(err) {
+			if (err) {
 				res.status(400);
 				res.render('error.ejs', err);
 			}
@@ -137,13 +131,13 @@ module.exports = function(app, passport) {
 	// FITBIT ROUTES =====================
 	// =====================================
 	// route for facebook authentication and login
-	app.get('/auth/fitbit', passport.authenticate('fitbit', {  scope : ['activity', 'heartrate', 'profile', 'sleep', 'weight'] }));
+	app.get('/auth/fitbit', passport.authenticate('fitbit', {scope: ['activity', 'heartrate', 'profile', 'sleep', 'weight']}));
 
 	// handle the callback after facebook has authenticated the user
 	app.get('/auth/fitbit/callback',
 		passport.authenticate('fitbit', {
-			successRedirect : '/profile',
-			failureRedirect : '/'
+			successRedirect: '/profile',
+			failureRedirect: '/'
 		})
 	);
 
@@ -152,39 +146,38 @@ module.exports = function(app, passport) {
 // =============================================================================
 
   // locally --------------------------------
-	app.get('/connect/local', function(req, res) {
-		res.render('connect-local.ejs', { message: req.flash('loginMessage') });
+	app.get('/connect/local', function (req, res) {
+		res.render('connect-local.ejs', {message: req.flash('loginMessage')});
 	});
 	app.post('/connect/local', passport.authenticate('local-signup', {
-		successRedirect : '/profile', // redirect to the secure profile section
-		failureRedirect : '/connect/local', // redirect back to the signup page if there is an error
-		failureFlash : true // allow flash messages
+		successRedirect: '/profile', // redirect to the secure profile section
+		failureRedirect: '/connect/local', // redirect back to the signup page if there is an error
+		failureFlash: true // allow flash messages
 	}));
 
   // facebook -------------------------------
 	// send to facebook to do the authentication
-	app.get('/connect/facebook', passport.authorize('facebook', { scope : 'email' }));
+	app.get('/connect/facebook', passport.authorize('facebook', {scope: 'email'}));
 
 	// handle the callback after facebook has authorized the user
 	app.get('/connect/facebook/callback',
 		passport.authorize('facebook', {
-			successRedirect : '/profile',
-			failureRedirect : '/'
+			successRedirect: '/profile',
+			failureRedirect: '/'
 		})
 	);
 
   // fitbit -------------------------------
 	// send to fitbit to do the authentication
-	app.get('/connect/fitbit', passport.authorize('fitbit', {  scope : ['activity', 'heartrate', 'profile', 'sleep', 'weight'] }));
+	app.get('/connect/fitbit', passport.authorize('fitbit', {scope: ['activity', 'heartrate', 'profile', 'sleep', 'weight']}));
 
 	// handle the callback after fitbit has authorized the user
 	app.get('/connect/fitbit/callback',
 		passport.authorize('fitbit', {
-			successRedirect : '/profile',
-			failureRedirect : '/'
+			successRedirect: '/profile',
+			failureRedirect: '/'
 		})
 	);
-
 
 // =============================================================================
 // UNLINK ACCOUNTS =============================================================
@@ -194,38 +187,36 @@ module.exports = function(app, passport) {
 // user account will stay active in case they want to reconnect in the future
 
   // local -----------------------------------
-	app.get('/unlink/local', function(req, res) {
-		var user            = req.user;
-		user.local.email    = undefined;
+	app.get('/unlink/local', function (req, res) {
+		var user = req.user;
+		user.local.email = undefined;
 		user.local.password = undefined;
-		user.save(function(err) {
+		user.save(function (err) {
 			res.redirect('/profile');
 		});
 	});
 
   // facebook -------------------------------
-	app.get('/unlink/facebook', function(req, res) {
-		var user            = req.user;
+	app.get('/unlink/facebook', function (req, res) {
+		var user = req.user;
 		user.facebook.token = undefined;
-		user.save(function(err) {
+		user.save(function (err) {
 			res.redirect('/profile');
 		});
 	});
 
   // fitbit -------------------------------
-	app.get('/unlink/fitbit', function(req, res) {
-		var user            = req.user;
-		user.fitbit.token   = undefined;
-		user.save(function(err) {
+	app.get('/unlink/fitbit', function (req, res) {
+		var user = req.user;
+		user.fitbit.token = undefined;
+		user.save(function (err) {
 			res.redirect('/profile');
 		});
 	});
-
 };
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-
 	// if user is authenticated in the session, carry on
 	if (req.isAuthenticated())
 		return next();
