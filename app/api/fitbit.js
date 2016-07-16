@@ -15,8 +15,22 @@ const resources = {
 		'minutesAfterWakeup',
 		'efficiency'
 	],
-	activities: [ // period: 1d, 7d, 30d, 1w, 1m.
-		'heart'
+	activities: [
+		'heart', // period: 1d, 7d, 30d, 1w, 1m.
+
+		// Also accessible through activities/log but I don't have 3 level nesting support atm.
+		// period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
+		'calories',
+		'caloriesBMR',
+		'steps',
+		'distance',
+		'floors',
+		'elevation',
+		'minutesSedentary',
+		'minutesLightlyActive',
+		'minutesFairlyActive',
+		'minutesVeryActive',
+		'activityCalories'
 	],
 	body: [ // period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
 		'bmi',

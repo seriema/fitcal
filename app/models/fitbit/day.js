@@ -7,27 +7,38 @@ var daySchema = mongoose.Schema({
 	id                  : String,
 	dateTime            : String, // ID // TODO: Should specify the format somewhere? For easy parsing with momentjs
 	sleep               : {
-		startTime           : String,
-		timeInBed           : String,
-		minutesAsleep       : String,
-		awakeningsCount     : String,
-		minutesAwake        : String,
-		minutesToFallAsleep : String,
-		minutesAfterWakeup  : String,
-		efficiency          : String
+		startTime           : String,  // "23:46"
+		timeInBed           : String,  // "376"
+		minutesAsleep       : String,  // "355"
+		awakeningsCount     : String,  // "10"
+		minutesAwake        : String,  // "21"
+		minutesToFallAsleep : String,  // "0"
+		minutesAfterWakeup  : String,  // "0"
+		efficiency          : String   // "94"
 	},
 	activities          : {
 		heart               : {
 			//customHeartRateZones: ??
 			restingHeartRate    : Number,      // 68
 			heartRateZones      : [{
-			caloriesOut         : Number,  // 740.15264
-			max                 : Number,  // 94
-			min                 : Number,  // 30
-			minutes             : Number,  // 593
-			name                : String   // "Fat Burn"
+				caloriesOut         : Number,  // 740.15264
+				max                 : Number,  // 94
+				min                 : Number,  // 30
+				minutes             : Number,  // 593
+				name                : String   // "Fat Burn"
 			}]
-		}
+		},
+		calories            : String,  // "3193"
+		caloriesBMR         : String,  // "1668"
+		steps               : String,  // "13311"
+		distance            : String,  // "9.78446"
+		floors              : String,  // "13"
+		elevation           : String,  // "39"
+		minutesSedentary    : String,  // "700"
+		minutesLightlyActive: String,  // "287"
+		minutesFairlyActive : String,  // "33"
+		minutesVeryActive   : String,  // "33"
+		activityCalories    : String   // "1697"
 	},
 	body               : {
 		bmi                 : String,  // "23.125537872314453"
