@@ -1,8 +1,7 @@
 let q = require('q');
-let FitbitApiClient = require("./fitbitClient");
+let FitbitApiClient = require('./fitbitClient');
 let client = new FitbitApiClient();
 let Day = require('../../models/fitbit/day');
-
 
 const resources = {
 	sleep: [ // period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
@@ -52,7 +51,6 @@ function saveDay(userFitbitId, day, data) {
 	};
 
 	Day.findOne(query, function (err, dataPoint) {
-
 		// if there is an error, stop everything and return that
 		// i.e. an error connecting to the database
 		if (err)
@@ -142,10 +140,9 @@ function importTimeSeries(user, res) {
 				return handleFitbitResponse(result, scope, category);
 			});
 		});
-	}).reduce( (a, b) => { // flatten
+	}).reduce((a, b) => { // flatten
 		return a.concat(b);
 	}, []);
-
 
 	q.all(fitbitPromises)
 		.then(joinTimeSeries)

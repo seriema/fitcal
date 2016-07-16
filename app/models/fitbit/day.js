@@ -49,7 +49,7 @@ var daySchema = mongoose.Schema({
 
 // methods ======================
 function getNumber(value) {
-	if (value === "0" || !value)
+	if (value === '0' || !value)
 		return null; // Fitbit spams the logs with no data
 
 	return parseInt(value, 10);
@@ -80,7 +80,7 @@ daySchema.methods.end = function () {
 daySchema.methods.summary = function () {
 	var minAsleep = moment.duration(this.minutesAsleep, 'minutes');
 	var awakeCount = this.awakeningsCount === undefined ? 'unknown' : this.awakeningsCount; // 0 is a valid number
-	//var awakeText = this.awakeningsCount === undefined ? '' : `${this.awakeningsCount} times awake`; // 0 is a valid number
+	// var awakeText = this.awakeningsCount === undefined ? '' : `${this.awakeningsCount} times awake`; // 0 is a valid number
 	var text = `Sleep - ${minAsleep.hours()} h ${minAsleep.minutes()} min - ${this.efficiency} % - ${awakeCount} times awake`;
 	return text;
 };
@@ -106,7 +106,6 @@ daySchema.virtual('day').get(function () {
 	day.add(1, 'day'); // TODO: This doesn't make sense. Make it make sense.
 	return day;
 });
-
 
 /*
  daySchema.virtual('start').get(function () {
@@ -144,15 +143,11 @@ daySchema.virtual('day').get(function () {
  });
  */
 
-
 /*
  start: value.start.toDate(),
  end: value.stop.toDate(),
  summary: `Sleep - ${value.duration.hours()} h ${value.duration.minutes()} min - ${value.efficiency} % - ${value.awakeningsCount} times awake`,
  description: JSON.stringify(value)
-
-
-
 
  time            : {
  start       : String,
@@ -163,7 +158,6 @@ daySchema.virtual('day').get(function () {
  efficiency      : Number
 
  */
-
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('Fitbit.Day', daySchema);

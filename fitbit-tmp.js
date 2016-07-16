@@ -43,13 +43,12 @@ function apiActivity(token, callback) {
 	// https://community.fitbit.com/t5/Web-API/Breaking-change-to-Get-Activity-Logs-List/m-p/1277033#M5120
 	const today = moment().tz(TIMEZONE).format('YYYY-MM-DD');
 	const limit = 20; // Max allowed
-	//client.get(`/activities/list.json?beforeDate=${today}&sort=desc&limit=${limit}&offset=0`, token).then(function (results) {
-	var path = '/activities/list.json?beforeDate='+today+'&sort=desc&limit='+limit+'&offset=0';
+	// client.get(`/activities/list.json?beforeDate=${today}&sort=desc&limit=${limit}&offset=0`, token).then(function (results) {
+	var path = '/activities/list.json?beforeDate=' + today + '&sort=desc&limit=' + limit + '&offset=0';
 	client.get(path, token).then(function (results) {
 		var activityData = calcActivites(results[0]);
 		callback(activityData);
 	});
-
 }
 
 // --- Sleep summary ---
@@ -82,7 +81,7 @@ function calcSleepTimes(allStartTimes, allMinutesAsleep, allAwakeningsCounts, al
 	});
 
 	allMinutesAsleep.forEach(function (time) {
-		if (time.value === "0" || !time.value)
+		if (time.value === '0' || !time.value)
 			return; // Fitbit spams the logs with no data
 
 		var data = sleepData[time.dateTime];
@@ -99,7 +98,7 @@ function calcSleepTimes(allStartTimes, allMinutesAsleep, allAwakeningsCounts, al
 	});
 
 	allAwakeningsCounts.forEach(function (time) {
-		if (time.value === "0" || !time.value)
+		if (time.value === '0' || !time.value)
 			return; // Fitbit spams the logs with no data
 
 		var data = sleepData[time.dateTime];
@@ -113,7 +112,7 @@ function calcSleepTimes(allStartTimes, allMinutesAsleep, allAwakeningsCounts, al
 	});
 
 	allEfficiencies.forEach(function (time) {
-		if (time.value === "0" || !time.value)
+		if (time.value === '0' || !time.value)
 			return; // Fitbit spams the logs with no data
 
 		var data = sleepData[time.dateTime];
@@ -128,17 +127,17 @@ function calcSleepTimes(allStartTimes, allMinutesAsleep, allAwakeningsCounts, al
 	return sleepData;
 }
 function apiSleep(token, callback) {
-	client.get("/sleep/startTime/date/today/max.json", token).then(function (results) {
-		var allStartTimes = results[0]["sleep-startTime"];
+	client.get('/sleep/startTime/date/today/max.json', token).then(function (results) {
+		var allStartTimes = results[0]['sleep-startTime'];
 
-		client.get("/sleep/minutesAsleep/date/today/max.json", token).then(function (results) {
-			var allMinutesAsleep = results[0]["sleep-minutesAsleep"];
+		client.get('/sleep/minutesAsleep/date/today/max.json', token).then(function (results) {
+			var allMinutesAsleep = results[0]['sleep-minutesAsleep'];
 
-			client.get("/sleep/awakeningsCount/date/today/max.json", token).then(function (results) {
-				var allAwakeningsCounts = results[0]["sleep-awakeningsCount"];
+			client.get('/sleep/awakeningsCount/date/today/max.json', token).then(function (results) {
+				var allAwakeningsCounts = results[0]['sleep-awakeningsCount'];
 
-				client.get("/sleep/efficiency/date/today/max.json", token).then(function (results) {
-					var allEfficiencies = results[0]["sleep-efficiency"];
+				client.get('/sleep/efficiency/date/today/max.json', token).then(function (results) {
+					var allEfficiencies = results[0]['sleep-efficiency'];
 
 					var sleepData = calcSleepTimes(allStartTimes, allMinutesAsleep, allAwakeningsCounts, allEfficiencies);
 					callback(sleepData);
@@ -169,8 +168,8 @@ function calcHeartRestingRates(allHearts) {
 }
 function apiHeart(token, callback) {
 	// Note: only gets 1 month
-	client.get("/activities/heart/date/today/1m.json", token).then(function (results) {
-		var allHearts = results[0]["activities-heart"];
+	client.get('/activities/heart/date/today/1m.json', token).then(function (results) {
+		var allHearts = results[0]['activities-heart'];
 		var heartData = calcHeartRestingRates(allHearts);
 
 		callback(heartData);
@@ -198,7 +197,6 @@ app.get("/calendar/ical", function (req, res) {
 
 			apiActivity(function (activityData) {
 				console.log("3/3: got activity data");
-
 
 				// - Setup iCal -
 				var cal = ical({

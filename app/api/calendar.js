@@ -17,7 +17,7 @@ function getSleep(user) {
 
 		// if the sleep data is not found, abort
 		if (!sleepData)
-			return sleepDeferred.reject("There doesn't seem to be any sleep data for you.");
+			return sleepDeferred.reject('There doesn\'t seem to be any sleep data for you.');
 
 		var events = [];
 		sleepData.forEach(function (sleepDay) {
@@ -52,7 +52,7 @@ function getRestingHeartRate(user) {
 
 		// if the sleep data is not found, abort
 		if (!hrData)
-			return hrDeferred.reject("There doesn't seem to be any sleep data for you.");
+			return hrDeferred.reject('There doesn\'t seem to be any sleep data for you.');
 
 		var events = [];
 		hrData.forEach(function (hrDay) {
