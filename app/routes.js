@@ -1,5 +1,5 @@
 //var http = require('http');
-var fitbit = require('./api/fitbit');
+var fitbit = require('./api/fitbit/fitbit');
 var calendar = require('./api/calendar');
 
 module.exports = function(app, passport) {
@@ -40,7 +40,7 @@ module.exports = function(app, passport) {
 			return res.render('error.ejs', "You need to be logged in and have linked your account with Fitbit.");
 		}
 
-		fitbit.importSleep(user, res);
+		fitbit.importTimeSeries(user, res);
 	});
 
 	// =====================================

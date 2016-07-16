@@ -4,7 +4,7 @@
 var OAuth2 = require('simple-oauth2'),
 	Q = require('q'),
 	Request = require('request');
-var configAuth = require('./../../config/auth');
+var configAuth = require('./../../../config/auth');
 
 function FitbitApiClient() {
 	this.oauth2 = OAuth2({
