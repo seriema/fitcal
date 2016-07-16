@@ -1,7 +1,7 @@
 let q = require('q');
 let FitbitApiClient = require("./fitbitClient");
 let client = new FitbitApiClient();
-let Day = require('../models/fitbit/day');
+let Day = require('../../models/fitbit/day');
 
 
 const resources = {
@@ -158,6 +158,4 @@ function importTimeSeries(user, res) {
 		});
 }
 
-module.exports = {
-	importTimeSeries
-};
+module.exports = importTimeSeries;

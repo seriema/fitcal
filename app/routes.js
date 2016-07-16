@@ -1,5 +1,5 @@
 //var http = require('http');
-var fitbit = require('./api/fitbit');
+var fitbit = require('./api/fitbit/fitbit');
 var calendar = require('./api/calendar');
 
 module.exports = function(app, passport) {
