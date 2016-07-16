@@ -43,10 +43,41 @@ var daySchema = new mongoose.Schema({
 		minutesVeryActive   : String,  // "33"
 		activityCalories    : String   // "1697"
 	},
-	body               : {
+	body                : {
 		bmi                 : String,  // "23.125537872314453"
 		fat                 : String,  // "16.0"
 		weight              : String   // "72.45"
+	},
+	trackedActivities   : {
+		activeDuration      : Number,  // 1036000
+		activityLevel       : [{
+			minutes             : Number,  // 17
+			name                : String   // "lightly"
+		}],
+		activityName        : String,  // "Walk"
+		activityTypeId      : Number,  // 90013
+		averageHeartRate    : Number,  // 103
+		calories            : Number,  // 104
+		// caloriesLink // I'll skip this for now
+		duration            : Number,  // 1036000
+		// heartRateLink // I'll skip this for now
+		heartRateZones      : [{
+			max                 : Number,  // 130
+			min                 : Number,  // 93
+			minutes             : Number,  // 14
+			name                : String   // "Fat Burn"
+		}],
+		lastModified       : String,  // "2016-05-31T18:00:54.000Z"
+		logId              : Number,  // 2793328166
+		logType            : String,  // auto_detected
+		manualValuesSpecified: [{
+			calories            : Boolean,  // false
+			distance            : Boolean,  // false
+			steps               : Boolean   // false
+		}],
+		startTime          : String,  // "2016-05-31T19:33:41.000+02:00"
+		steps              : Number   // 1291
+		// tcxLink // I'll skip this for now
 	}
 });
 
