@@ -85,28 +85,26 @@ daySchema.methods.summary = function () {
 	return text;
 };
 
-/* "dateTime": "2015-10-22", "value": "280" */
-/*daySchema.methods.minutesAsleep = function () {
- return getNumber(this.sleep.minutesAsleep);
- };*/
 daySchema.virtual('minutesAsleep').get(function () {
 	return getNumber(this.sleep.minutesAsleep);
 });
 
-/* "dateTime": "2015-10-22", "value": "7" */
-/*daySchema.methods.awakeningsCounts = function () {
- return getNumber(this.sleep.awakeningsCount);
- };*/
 daySchema.virtual('awakeningsCount').get(function () {
 	return getNumber(this.sleep.awakeningsCount);
 });
 
-/* "dateTime": "2015-10-22", "value": "95" */
-/*daySchema.methods.efficiency = function () {
- return getNumber(this.sleep.efficiency);
- };*/
 daySchema.virtual('efficiency').get(function () {
 	return getNumber(this.sleep.efficiency);
+});
+
+daySchema.virtual('restingHeartRate').get(function () {
+	return this.activities.heart.restingHeartRate;
+});
+
+daySchema.virtual('day').get(function () {
+	let day = moment.tz(this.dateTime, TIMEZONE);
+	day.add(1, 'day'); // TODO: This doesn't make sense. Make it make sense.
+	return day;
 });
 
 
