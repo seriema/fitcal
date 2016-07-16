@@ -4,31 +4,36 @@ const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
 const DATEFORMAT = 'YYYY-MM-DD';
 
 var daySchema = mongoose.Schema({
-	id: String,
-	dateTime: String, // ID // TODO: Should specify the format somewhere? For easy parsing with momentjs
-	sleep: {
-		startTime: String,
-		timeInBed: String,
-		minutesAsleep: String,
-		awakeningsCount: String,
-		minutesAwake: String,
-		minutesToFallAsleep: String,
-		minutesAfterWakeup: String,
-		efficiency: String
+	id                  : String,
+	dateTime            : String, // ID // TODO: Should specify the format somewhere? For easy parsing with momentjs
+	sleep               : {
+		startTime           : String,
+		timeInBed           : String,
+		minutesAsleep       : String,
+		awakeningsCount     : String,
+		minutesAwake        : String,
+		minutesToFallAsleep : String,
+		minutesAfterWakeup  : String,
+		efficiency          : String
 	},
-	activities: {
-		heart: {
+	activities          : {
+		heart               : {
 			//customHeartRateZones: ??
-			restingHeartRate: Number,      // 68
-			heartRateZones: [{
-				caloriesOut: Number,  // 740.15264
-				max: Number,  // 94
-				min: Number,  // 30
-				minutes: Number,  // 593
-				name: String   // "Fat Burn"
+			restingHeartRate    : Number,      // 68
+			heartRateZones      : [{
+			caloriesOut         : Number,  // 740.15264
+			max                 : Number,  // 94
+			min                 : Number,  // 30
+			minutes             : Number,  // 593
+			name                : String   // "Fat Burn"
 			}]
 		}
 	},
+	body               : {
+		bmi                 : String,  // "23.125537872314453"
+		fat                 : String,  // "16.0"
+		weight              : String   // "72.45"
+	}
 });
 
 // methods ======================

@@ -5,7 +5,7 @@ var Day = require('../models/fitbit/day');
 
 
 const resources = {
-	sleep: [
+	sleep: [ // period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
 		'startTime',
 		'timeInBed',
 		'minutesAsleep',
@@ -15,8 +15,13 @@ const resources = {
 		'minutesAfterWakeup',
 		'efficiency'
 	],
-	activities: [
+	activities: [ // period: 1d, 7d, 30d, 1w, 1m.
 		'heart'
+	],
+	body: [ // period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
+		'bmi',
+		'fat',
+		'weight'
 	]
 };
 
@@ -113,16 +118,22 @@ function joinTimeSeries(timeSeries) {
 }
 
 function importTimeSeries(user, res) {
-	let scope = 'activities';
-	let fitbitPromises = resources[scope].map(callFitbit.bind(null, user.fitbit.token, scope));
-	scope = 'sleep';
-	fitbitPromises = fitbitPromises.concat(resources[scope].map(callFitbit.bind(null, user.fitbit.token, scope)));
+	// Go through all scopes and categories, and flatten the promises.
+	const scopes = Object.keys(resources);
+	let fitbitPromises = scopes.map(scope => {
+		return resources[scope].map(category =>
+			callFitbit(user.fitbit.token, scope, category)
+		);
+	}).reduce( (a, b) => { // flatten
+		return a.concat(b);
+	}, []);
+
 
 	q.all(fitbitPromises)
 		.then(joinTimeSeries)
 		.then(saveTimeSeries.bind(null, user.fitbit.id))
 		.then(function () {
-			res.send(`Import complete of ${resources.sleep.length} sleep categories from ${timeSpan.baseDate} and going back ${timeSpan.period}.`);
+			res.send(`Import complete of ${fitbitPromises.length} categories in ${scopes.length} scopes, from ${timeSpan.baseDate} and going back ${timeSpan.period}.`);
 		})
 		.fail(function (error) {
 			res.render('error.ejs', {error});
