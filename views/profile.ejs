@@ -1,93 +1,93 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <style>
-        body        { padding-top:80px; word-wrap:break-word; }
-    </style>
+	<title>Node Authentication</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<style>
+		body        { padding-top:80px; word-wrap:break-word; }
+	</style>
 </head>
 <body>
 <div class="container">
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+	<div class="page-header text-center">
+		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+	</div>
 
-    <div class="row">
+	<div class="row">
 
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+		<!-- LOCAL INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+				<h3><span class="fa fa-user"></span> Local</h3>
 
-                <% if (user.local.email) { %>
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
+				<% if (user.local.email) { %>
+					<p>
+						<strong>id</strong>: <%= user._id %><br>
+						<strong>email</strong>: <%= user.local.email %><br>
+						<strong>password</strong>: <%= user.local.password %>
+					</p>
 
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                <% } %>
+					<a href="/unlink/local" class="btn btn-default">Unlink</a>
+				<% } else { %>
+					<a href="/connect/local" class="btn btn-default">Connect Local</a>
+				<% } %>
 
-            </div>
-        </div>
+			</div>
+		</div>
 
-        <!-- FACEBOOK INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+		<!-- FACEBOOK INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+				<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
 
-                <!-- check if the user has this token (is the user authenticated with this social account) -->
-                <% if (user.facebook.token) { %>
-                    <p>
-                        <strong>id</strong>: <%= user.facebook.id %><br>
-                        <strong>token</strong>: <%= user.facebook.token %><br>
-                        <strong>email</strong>: <%= user.facebook.email %><br>
-                        <strong>name</strong>: <%= user.facebook.name %><br>
-                    </p>
+				<!-- check if the user has this token (is the user authenticated with this social account) -->
+				<% if (user.facebook.token) { %>
+					<p>
+						<strong>id</strong>: <%= user.facebook.id %><br>
+						<strong>token</strong>: <%= user.facebook.token %><br>
+						<strong>email</strong>: <%= user.facebook.email %><br>
+						<strong>name</strong>: <%= user.facebook.name %><br>
+					</p>
 
-                    <a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
-                <% } %>
+					<a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
+				<% } else { %>
+					<a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
+				<% } %>
 
-            </div>
-        </div>
+			</div>
+		</div>
 
-        <!-- FITBIT INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3 class="text-primary"><span class="fa fa-heartbeat"></span> Fitbit</h3>
+		<!-- FITBIT INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+				<h3 class="text-primary"><span class="fa fa-heartbeat"></span> Fitbit</h3>
 
-                <!-- check if the user has this token (is the user authenticated with this social account) -->
-                <% if (user.fitbit.token) { %>
-                    <p>
-                        <strong>id</strong>: <%= user.fitbit.id %><br>
-                        <strong>token</strong>: <%= user.fitbit.token %><br>
-                        <strong>name</strong>: <%= user.fitbit.name %><br>
-                    </p>
+				<!-- check if the user has this token (is the user authenticated with this social account) -->
+				<% if (user.fitbit.token) { %>
+					<p>
+						<strong>id</strong>: <%= user.fitbit.id %><br>
+						<strong>token</strong>: <%= user.fitbit.token %><br>
+						<strong>name</strong>: <%= user.fitbit.name %><br>
+					</p>
 
-                    <p>
-                        <a href="/import/fitbit" class="btn btn-default">Import data</a>
-                        <a href="/export/calendar" class="btn btn-default">Export calendar</a>
-                    </p>
-                    <p>
-                        <a href="/unlink/fitbit" class="btn btn-primary">Unlink</a>
-                    </p>
-                <% } else { %>
-                    <a href="/connect/fitbit" class="btn btn-primary">Connect Fitbit</a>
-                <% } %>
+					<p>
+						<a href="/import/fitbit" class="btn btn-default">Import data</a>
+						<a href="/export/calendar" class="btn btn-default">Export calendar</a>
+					</p>
+					<p>
+						<a href="/unlink/fitbit" class="btn btn-primary">Unlink</a>
+					</p>
+				<% } else { %>
+					<a href="/connect/fitbit" class="btn btn-primary">Connect Fitbit</a>
+				<% } %>
 
-            </div>
-        </div>
+			</div>
+		</div>
 
-    </div>
+	</div>
 
 </div>
 </body>
