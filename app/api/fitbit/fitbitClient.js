@@ -6,7 +6,7 @@ var q = require('q');
 var request = require('request');
 var configAuth = require('./../../../config/auth');
 
-function FitbitApiClient() {
+function FitbitApiClient(id, token, refreshToken) {
 	this.oauth2 = oauth2({
 		clientID: configAuth.fitbitAuth.clientID,
 		clientSecret: configAuth.fitbitAuth.clientSecret,
@@ -15,6 +15,12 @@ function FitbitApiClient() {
 		tokenPath: 'oauth2/token',
 		useBasicAuthorizationHeader: true
 	});
+
+	this.user = {
+		id,
+		token,
+		refreshToken
+	};
 }
 
 FitbitApiClient.prototype = {
@@ -42,12 +48,12 @@ FitbitApiClient.prototype = {
 		return deferred.promise;
 	},
 
-	refreshAccesstoken: function (accessToken, refreshToken) {
+	refreshAccesstoken: function () {
 		var deferred = q.defer();
 
 		var token = this.oauth2.accessToken.create({
-			access_token: accessToken,
-			refresh_token: refreshToken,
+			access_token: this.user.accessToken,
+			refresh_token: this.user.refreshToken,
 			expires_in: -1
 		});
 
@@ -62,14 +68,14 @@ FitbitApiClient.prototype = {
 		return deferred.promise;
 	},
 
-	get: function (path, accessToken, userId) {
+	get: function (path) {
 		var deferred = q.defer();
 
 		request({
-			url: getUrl(path, userId),
+			url: getUrl(path, this.user.id),
 			method: 'GET',
 			headers: {
-				Authorization: 'Bearer ' + accessToken
+				Authorization: 'Bearer ' + this.user.accessToken
 			},
 			json: true
 		}, function (error, response, body) {

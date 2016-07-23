@@ -211,6 +211,7 @@ module.exports = function (passport) {
 					user.fitbit.id = profile.id; // set the users fitbit id
 					user.fitbit.token = token; // we will save the token that fitbit provides to the user
 					user.fitbit.name = profile.displayName; // look at the passport user profile to see how names are returned
+					user.fitbit.refreshToken = refreshToken;
 
 					// save the user
 					user.save(function (err) {
@@ -240,7 +241,9 @@ module.exports = function (passport) {
 						// set all of the fitbit information in our user model
 						newUser.fitbit.id = profile.id; // set the users fitbit id
 						newUser.fitbit.token = token; // we will save the token that fitbit provides to the user
-						newUser.fitbit.name = profile.displayName; // look at the passport user profile to see how names are returned
+						newUser.fitbit.name  = profile.displayName; // look at the passport user profile to see how names are returned
+						newUser.fitbit.refreshToken = refreshToken;
+
 
 						// save our user to the database
 						newUser.save(function (err) {

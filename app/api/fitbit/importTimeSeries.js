@@ -1,42 +1,43 @@
 let q = require('q');
 let Day = require('../../models/fitbit/day');
 let FitbitApiClient = require('./fitbitClient');
+let responseHandler = require('./responseHandler');
 
 let client = new FitbitApiClient();
 
 const resources = {
 	sleep: [ // period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
 		'startTime',
-		'timeInBed',
-		'minutesAsleep',
-		'awakeningsCount',
-		'minutesAwake',
-		'minutesToFallAsleep',
-		'minutesAfterWakeup',
-		'efficiency'
+		// 'timeInBed',
+		// 'minutesAsleep',
+		// 'awakeningsCount',
+		// 'minutesAwake',
+		// 'minutesToFallAsleep',
+		// 'minutesAfterWakeup',
+		// 'efficiency'
 	],
-	activities: [
-		'heart', // period: 1d, 7d, 30d, 1w, 1m.
-
-		// Also accessible through activities/log but I don't have 3 level nesting support atm.
-		// period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
-		'calories',
-		'caloriesBMR',
-		'steps',
-		'distance',
-		'floors',
-		'elevation',
-		'minutesSedentary',
-		'minutesLightlyActive',
-		'minutesFairlyActive',
-		'minutesVeryActive',
-		'activityCalories'
-	],
-	body: [ // period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
-		'bmi',
-		'fat',
-		'weight'
-	]
+	// activities: [
+	// 	'heart', // period: 1d, 7d, 30d, 1w, 1m.
+    //
+	// 	// Also accessible through activities/log but I don't have 3 level nesting support atm.
+	// 	// period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
+	// 	'calories',
+	// 	'caloriesBMR',
+	// 	'steps',
+	// 	'distance',
+	// 	'floors',
+	// 	'elevation',
+	// 	'minutesSedentary',
+	// 	'minutesLightlyActive',
+	// 	'minutesFairlyActive',
+	// 	'minutesVeryActive',
+	// 	'activityCalories'
+	// ],
+	// body: [ // period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
+	// 	'bmi',
+	// 	'fat',
+	// 	'weight'
+	// ]
 };
 
 const timeSpan = {
@@ -110,9 +111,10 @@ function handleFitbitResponse(result, scope, category) {
 	};
 }
 
-function callFitbit(token, scope, category) {
+function callFitbit(user, scope, category) {
 	const path = `/${scope}/${category}/date/${timeSpan.baseDate}/${timeSpan.period}.json`;
-	return client.get(path, token);
+	return client.get(path, user.token, user.id);
+	// return responseHandler.firstAttempt(client.get.bind(client, path, user.token, user.id));
 }
 
 function joinTimeSeries(timeSeries) {
@@ -139,7 +141,7 @@ function importTimeSeries(user, res) {
 	const scopes = Object.keys(resources);
 	let fitbitPromises = scopes.map(scope => {
 		return resources[scope].map(category => {
-			return callFitbit(user.fitbit.token, scope, category).then(result => {
+			return callFitbit(user.fitbit, scope, category).then(result => {
 				return handleFitbitResponse(result, scope, category);
 			});
 		});

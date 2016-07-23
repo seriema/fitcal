@@ -38,7 +38,24 @@ module.exports = function (app, passport) {
 			return res.render('error.ejs', 'You need to be logged in and have linked your account with Fitbit.');
 		}
 
-		fitbit.importTimeSeries(user, res);
+		fitbit.doDance(user, res);
+
+		/*
+
+		fitbit.responseHandler(user).then(() => {
+			fitbit.importTimeSeries(user, res);
+			res.redirect('/');
+		}).catch(err => {
+			if (err.context.errors[0].errorType === 'invalid_grant') {
+//			passport.authorize('fitbit', {  scope : ['activity', 'heartrate', 'profile', 'sleep', 'weight'] })
+				res.redirect('/connect/fitbit').then(() => {
+					fitbit.importTimeSeries(user, res); // TODO: OOPS! res redirected, so there won't be any feedback on the import results.
+				}).catch(err2 => {
+					res.render('error.ejs', err2);
+				});
+			}
+		});
+		*/
 	});
 
 	// =====================================
@@ -130,10 +147,10 @@ module.exports = function (app, passport) {
 	// =====================================
 	// FITBIT ROUTES =====================
 	// =====================================
-	// route for facebook authentication and login
-	app.get('/auth/fitbit', passport.authenticate('fitbit', {scope: ['activity', 'heartrate', 'profile', 'sleep', 'weight']}));
+	// route for fitbit authentication and login
+	app.get('/auth/fitbit', passport.authenticate('fitbit', {  scope : ['activity', 'heartrate', 'profile', 'sleep', 'weight'] }));
 
-	// handle the callback after facebook has authenticated the user
+	// handle the callback after fitbit has authenticated the user
 	app.get('/auth/fitbit/callback',
 		passport.authenticate('fitbit', {
 			successRedirect: '/profile',

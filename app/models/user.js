@@ -19,6 +19,7 @@ var userSchema = new mongoose.Schema({
 	fitbit           : {
 		id           : String,
 		token        : String,
+		refreshToken : String,
 		name         : String
 	}
 
