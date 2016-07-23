@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon server.js",
-    "test": "xo && mocha test/**/*.js"
+    "test": "xo && ava"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -32,8 +32,7 @@
     "node": "~6.0.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^2.5.3",
+    "ava": "^0.15.2",
     "xo": "^0.16.0"
   },
   "xo": {
