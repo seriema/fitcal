@@ -1,12 +1,14 @@
+/* eslint key-spacing: ["off"] */
+
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
 // define the schema for our user model
-var userSchema = mongoose.Schema({
+var userSchema = new mongoose.Schema({
 
 	local            : {
 		email        : String,
-		password     : String,
+		password     : String
 	},
 	facebook         : {
 		id           : String,

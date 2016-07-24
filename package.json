@@ -33,5 +33,12 @@
   },
   "devDependencies": {
     "xo": "^0.16.0"
+  },
+  "xo": {
+	"rules": {
+	  "no-warning-comments": "off",
+	  "filename-case": "off",
+	  "camelcase": ["error", { "properties": "never" }]
+	}
   }
 }

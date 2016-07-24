@@ -115,7 +115,7 @@ module.exports = function (app, passport) {
 
 		// on error; likely to be something FacebookTokenError token invalid or already used token,
 		// these errors occur when the user logs in twice with the same token
-		function (err, req, res, next) {
+		function (err, req, res) {
 			// You could put your own behavior in here, fx: you could force auth again...
 			// res.redirect('/auth/facebook/');
 			if (err) {
@@ -192,7 +192,12 @@ module.exports = function (app, passport) {
 		user.local.email = undefined;
 		user.local.password = undefined;
 		user.save(function (err) {
-			res.redirect('/profile');
+			if (err) {
+				res.status(400);
+				res.render('error.ejs', err);
+			} else {
+				res.redirect('/profile');
+			}
 		});
 	});
 
@@ -201,7 +206,12 @@ module.exports = function (app, passport) {
 		var user = req.user;
 		user.facebook.token = undefined;
 		user.save(function (err) {
-			res.redirect('/profile');
+			if (err) {
+				res.status(400);
+				res.render('error.ejs', err);
+			} else {
+				res.redirect('/profile');
+			}
 		});
 	});
 
@@ -210,7 +220,12 @@ module.exports = function (app, passport) {
 		var user = req.user;
 		user.fitbit.token = undefined;
 		user.save(function (err) {
-			res.redirect('/profile');
+			if (err) {
+				res.status(400);
+				res.render('error.ejs', err);
+			} else {
+				res.redirect('/profile');
+			}
 		});
 	});
 };
@@ -218,8 +233,9 @@ module.exports = function (app, passport) {
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 	// if user is authenticated in the session, carry on
-	if (req.isAuthenticated())
+	if (req.isAuthenticated()) {
 		return next();
+	}
 
 	// if they aren't redirect them to the home page
 	res.redirect('/');

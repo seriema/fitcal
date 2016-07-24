@@ -1,9 +1,12 @@
+/* eslint key-spacing: ["off"] */
+
 var mongoose = require('mongoose');
 var moment = require('moment-timezone');
+
 const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
 const DATEFORMAT = 'YYYY-MM-DD';
 
-var daySchema = mongoose.Schema({
+var daySchema = new mongoose.Schema({
 	id                  : String,
 	dateTime            : String, // ID // TODO: Should specify the format somewhere? For easy parsing with momentjs
 	sleep               : {
@@ -18,7 +21,7 @@ var daySchema = mongoose.Schema({
 	},
 	activities          : {
 		heart               : {
-			//customHeartRateZones: ??
+			// customHeartRateZones: ??
 			restingHeartRate    : Number,      // 68
 			heartRateZones      : [{
 				caloriesOut         : Number,  // 740.15264
@@ -49,8 +52,9 @@ var daySchema = mongoose.Schema({
 
 // methods ======================
 function getNumber(value) {
-	if (value === '0' || !value)
+	if (value === '0' || !value) {
 		return null; // Fitbit spams the logs with no data
+	}
 
 	return parseInt(value, 10);
 }
@@ -59,17 +63,19 @@ function getNumber(value) {
 daySchema.methods.start = function () {
 	/* "dateTime": "2015-10-22", "value": "01:13" */
 	var value = this.sleep.startTime; // TODO: Use virtual?
-	if (!value)
+	if (!value) {
 		return null; // Fitbit spams the logs with no data
+	}
 
 	// TODO: Should probably add minutesToFallAsleep?
-	var format = DATEFORMAT + '_' + 'hh:mm'; // Assuming Fitbit uses AM/PM, so it's 'hh'. For 24h time use 'HH'.
+	var format = `${DATEFORMAT}_hh:mm`; // Assuming Fitbit uses AM/PM, so it's 'hh'. For 24h time use 'HH'.
 	var dateString = this.dateTime + '_' + value;
 	var date = moment.tz(dateString, format, TIMEZONE);
 
 	// If we fell asleep after midnight we need to adjust time start time for the calendar.
-	if (date.format('A') === 'PM')
+	if (date.format('A') === 'PM') {
 		date.subtract(1, 'day');
+	}
 
 	return date;
 };
