@@ -1,13 +1,13 @@
 // Taken from https://github.com/lukasolson/fitbit-node
 // The idea is to rewrite it to something simpler and more standard.
 
-var OAuth2 = require('simple-oauth2'),
-	Q = require('q'),
-	Request = require('request');
+var oauth2 = require('simple-oauth2');
+var q = require('q');
+var request = require('request');
 var configAuth = require('./../../../config/auth');
 
 function FitbitApiClient() {
-	this.oauth2 = OAuth2({
+	this.oauth2 = oauth2({
 		clientID: configAuth.fitbitAuth.clientID,
 		clientSecret: configAuth.fitbitAuth.clientSecret,
 		site: 'https://api.fitbit.com/',
@@ -26,7 +26,7 @@ FitbitApiClient.prototype = {
 	},
 
 	getAccessToken: function (code, redirectUrl) {
-		var deferred = Q.defer();
+		var deferred = q.defer();
 
 		this.oauth2.authCode.getToken({
 			code: code,
@@ -43,7 +43,7 @@ FitbitApiClient.prototype = {
 	},
 
 	refreshAccesstoken: function (accessToken, refreshToken) {
-		var deferred = Q.defer();
+		var deferred = q.defer();
 
 		var token = this.oauth2.accessToken.create({
 			access_token: accessToken,
@@ -63,9 +63,9 @@ FitbitApiClient.prototype = {
 	},
 
 	get: function (path, accessToken, userId) {
-		var deferred = Q.defer();
+		var deferred = q.defer();
 
-		Request({
+		request({
 			url: getUrl(path, userId),
 			method: 'GET',
 			headers: {
@@ -87,9 +87,9 @@ FitbitApiClient.prototype = {
 	},
 
 	post: function (path, accessToken, data, userId) {
-		var deferred = Q.defer();
+		var deferred = q.defer();
 
-		Request({
+		request({
 			url: getUrl(path, userId),
 			method: 'POST',
 			headers: {
@@ -112,9 +112,9 @@ FitbitApiClient.prototype = {
 	},
 
 	put: function (path, accessToken, data, userId) {
-		var deferred = Q.defer();
+		var deferred = q.defer();
 
-		Request({
+		request({
 			url: getUrl(path, userId),
 			method: 'PUT',
 			headers: {
@@ -137,9 +137,9 @@ FitbitApiClient.prototype = {
 	},
 
 	delete: function (path, accessToken, userId) {
-		var deferred = Q.defer();
+		var deferred = q.defer();
 
-		Request({
+		request({
 			url: getUrl(path, userId),
 			method: 'DELETE',
 			headers: {
@@ -162,7 +162,8 @@ FitbitApiClient.prototype = {
 };
 
 function getUrl(path, userId) {
-	return url = 'https://api.fitbit.com/1/user/' + (userId || '-') + path;
+	var url = 'https://api.fitbit.com/1/user/' + (userId || '-') + path;
+	return url;
 }
 
 module.exports = FitbitApiClient;

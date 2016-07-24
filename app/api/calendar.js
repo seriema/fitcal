@@ -2,6 +2,7 @@ var ical = require('ical-generator');
 var q = require('q');
 var Day = require('../models/fitbit/day');
 var siteConfig = require('./../../config/site');
+
 const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
 
 function getSleep(user) {
@@ -12,18 +13,21 @@ function getSleep(user) {
 	Day.find(query, function (err, sleepData) {
 		// if there is an error, stop everything and return that
 		// i.e. an error connecting to the database
-		if (err)
+		if (err) {
 			return sleepDeferred.reject(err);
+		}
 
 		// if the sleep data is not found, abort
-		if (!sleepData)
+		if (!sleepData) {
 			return sleepDeferred.reject('There doesn\'t seem to be any sleep data for you.');
+		}
 
 		var events = [];
 		sleepData.forEach(function (sleepDay) {
 			var start = sleepDay.start();
-			if (!start)
+			if (!start) {
 				return; // TODO: Remove this scenario using a better query? There might not be start time info for this night. Or any info actually.
+			}
 
 			events.push({
 				start: start.toDate(), // TODO: I'd like the convenience methods start/end to return the correct format, but end uses start internally so I need to have the toDate() call here for now.
@@ -47,17 +51,20 @@ function getRestingHeartRate(user) {
 	Day.find(query, function (err, hrData) {
 		// if there is an error, stop everything and return that
 		// i.e. an error connecting to the database
-		if (err)
+		if (err) {
 			return hrDeferred.reject(err);
+		}
 
 		// if the sleep data is not found, abort
-		if (!hrData)
+		if (!hrData) {
 			return hrDeferred.reject('There doesn\'t seem to be any sleep data for you.');
+		}
 
 		var events = [];
 		hrData.forEach(function (hrDay) {
-			if (!hrDay.restingHeartRate)
+			if (!hrDay.restingHeartRate) {
 				return; // TODO: Remove this scenario using a better query? There might not be start time info for this night. Or any info actually.
+			}
 
 			events.push({
 				start: hrDay.day.toDate(), // TODO: I'd like the convenience methods start/end to return the correct format, but end uses start internally so I need to have the toDate() call here for now.
