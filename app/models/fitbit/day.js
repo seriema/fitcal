@@ -59,17 +59,15 @@ function getNumber(value) {
 	return parseInt(value, 10);
 }
 
-// Convenience methods for the calendar export.
-daySchema.methods.start = function () {
+function startCalc (dateTime, startTime) {
 	/* "dateTime": "2015-10-22", "value": "01:13" */
-	var value = this.sleep.startTime; // TODO: Use virtual?
-	if (!value) {
+	if (!startTime) {
 		return null; // Fitbit spams the logs with no data
 	}
 
 	// TODO: Should probably add minutesToFallAsleep?
-	var format = `${DATEFORMAT}_hh:mm`; // Assuming Fitbit uses AM/PM, so it's 'hh'. For 24h time use 'HH'.
-	var dateString = this.dateTime + '_' + value;
+    var format = `${DATEFORMAT}_hh:mm`; // Assuming Fitbit uses AM/PM, so it's 'hh'. For 24h time use 'HH'.
+	var dateString = dateTime + '_' + startTime;
 	var date = moment.tz(dateString, format, TIMEZONE);
 
 	// If we fell asleep after midnight we need to adjust time start time for the calendar.
@@ -78,16 +76,22 @@ daySchema.methods.start = function () {
 	}
 
 	return date;
+}
+
+// Convenience methods for the calendar export.
+daySchema.methods.start = function () {
+	return startCalc(this.dateTime, this.sleep.startTime);
 };
 daySchema.methods.end = function () {
-	var date = this.start().clone().add(this.minutesAsleep, 'minute');
-	return date;
+	let start = startCalc(this.dateTime, this.sleep.startTime);
+	return start.clone().add(this.sleep.minutesAsleep, 'minute');
 };
 daySchema.methods.summary = function () {
-	var minAsleep = moment.duration(this.minutesAsleep, 'minutes');
-	var awakeCount = this.awakeningsCount === undefined ? 'unknown' : this.awakeningsCount; // 0 is a valid number
+	const minAsleepAsNumber = getNumber(this.sleep.minutesAsleep);
+	const minAsleep = moment.duration(minAsleepAsNumber, 'minutes');
+	const awakeCount = this.sleep.awakeningsCount === undefined ? 'unknown' : this.sleep.awakeningsCount; // 0 is a valid number
 	// var awakeText = this.awakeningsCount === undefined ? '' : `${this.awakeningsCount} times awake`; // 0 is a valid number
-	var text = `Sleep - ${minAsleep.hours()} h ${minAsleep.minutes()} min - ${this.efficiency} % - ${awakeCount} times awake`;
+	const text = `Sleep - ${minAsleep.hours()} h ${minAsleep.minutes()} min - ${this.sleep.efficiency} % - ${awakeCount} times awake`;
 	return text;
 };
 
