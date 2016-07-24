@@ -1,5 +1,4 @@
-let FitbitApiClient = require("./fitbitClient");
-let q = require('q');
+let FitbitApiClient = require('./fitbitClient');
 
 // function firstAttempt(call) {
 // 	let deferred = q.defer();
@@ -16,21 +15,21 @@ let q = require('q');
 //
 // 	return deferred.promise;
 // }
-function firstAttempt(call) {
-	let deferred = q.defer();
-
-	call().then(result => {
-		result = result[0];
-		if (result.success === false) {
-			let error = result.errors[0];
-			return handleFitbitResponse(call, error)
-		} else {
-			deferred.resolve(result);
-		}
-	});
-
-	return deferred.promise;
-}
+// function firstAttempt(call) {
+// 	let deferred = q.defer();
+//
+// 	call().then(result => {
+// 		result = result[0];
+// 		if (result.success === false) {
+// 			let error = result.errors[0];
+// 			return handleFitbitResponse(call, error)
+// 		} else {
+// 			deferred.resolve(result);
+// 		}
+// 	});
+//
+// 	return deferred.promise;
+// }
 
 /*
  Response Headers
@@ -42,34 +41,31 @@ function firstAttempt(call) {
 
 */
 
-function handleFitbitResponse(call, error) {
-	let deferred = q.defer();
-
-	if (error.errorType === 'expired_token') {
-
-	} else {
-		throw error; // What other errors can I get?
-	}
-
-	return deferred.promise;
-}
-
+// function handleFitbitResponse(call, error) {
+// 	let deferred = q.defer();
+//
+// 	if (error.errorType === 'expired_token') {
+//
+// 	} else {
+// 		throw error; // What other errors can I get?
+// 	}
+//
+// 	return deferred.promise;
+// }
 
 // module.exports = {
 // 	firstAttempt: firstAttempt,
 // 	handleFitbitResponse: handleFitbitResponse
 // };
 
-
 function refreshToken(user) {
 	let client = new FitbitApiClient();
-	return client.refreshAccesstoken(user.fitbit.token, user.fitbit.refreshToken)
+	return client.refreshAccesstoken(user.fitbit.token, user.fitbit.refreshToken);
 		// .catch(error => {
 		// 	// refresh_token - invalid
 		// 	if (error.errorTyep === 'invalid_grant')
 		// 		return client.getAccessToken()
 		// });
 }
-
 
 module.exports = refreshToken;

@@ -1,13 +1,13 @@
 let q = require('q');
 let Day = require('../../models/fitbit/day');
 let FitbitApiClient = require('./fitbitClient');
-let responseHandler = require('./responseHandler');
+// let responseHandler = require('./responseHandler');
 
 let client = new FitbitApiClient();
 
 const resources = {
 	sleep: [ // period: 1d, 7d, 30d, 1w, 1m, 3m, 6m, 1y, or max.
-		'startTime',
+		'startTime'
 		// 'timeInBed',
 		// 'minutesAsleep',
 		// 'awakeningsCount',
@@ -15,7 +15,7 @@ const resources = {
 		// 'minutesToFallAsleep',
 		// 'minutesAfterWakeup',
 		// 'efficiency'
-	],
+	]
 	// activities: [
 	// 	'heart', // period: 1d, 7d, 30d, 1w, 1m.
     //

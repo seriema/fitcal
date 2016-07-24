@@ -148,7 +148,7 @@ module.exports = function (app, passport) {
 	// FITBIT ROUTES =====================
 	// =====================================
 	// route for fitbit authentication and login
-	app.get('/auth/fitbit', passport.authenticate('fitbit', {  scope : ['activity', 'heartrate', 'profile', 'sleep', 'weight'] }));
+	app.get('/auth/fitbit', passport.authenticate('fitbit', {scope: ['activity', 'heartrate', 'profile', 'sleep', 'weight']}));
 
 	// handle the callback after fitbit has authenticated the user
 	app.get('/auth/fitbit/callback',
