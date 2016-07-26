@@ -1,12 +1,11 @@
-let model = require('./../../../app/models/fitbit/day');
 let expect = require('chai').expect;
-let moment = require('moment');
+let moment = require('moment-timezone');
+let model = require('./../../../app/models/fitbit/day');
 
 let methods = model.schema.methods;
 
-
-describe('#start', function() {
-	describe('with missing dateTime', function() {
+describe('#start', () => {
+	describe('with missing dateTime', () => {
 		let sleepData;
 
 		beforeEach(() => {
@@ -15,7 +14,7 @@ describe('#start', function() {
 				sleep: {
 					startTime: undefined
 				}
-			}
+			};
 		});
 
 		it('should be null', () => {
@@ -25,7 +24,7 @@ describe('#start', function() {
 		});
 	});
 
-	describe('with normal data', function() {
+	describe('with normal data', () => {
 		let sleepData;
 
 		beforeEach(() => {
@@ -34,7 +33,7 @@ describe('#start', function() {
 				sleep: {
 					startTime: '23:46'
 				}
-			}
+			};
 		});
 
 		it('should be a moment object', () => {
@@ -67,12 +66,11 @@ describe('#start', function() {
 			let result = methods.start.call(sleepData);
 			expect(result.get('minute')).to.equal(46);
 		});
-
 	});
 });
 
-describe('#end', function() {
-	describe('with normal data', function() {
+describe('#end', () => {
+	describe('with normal data', () => {
 		let sleepData;
 
 		beforeEach(() => {
@@ -82,7 +80,7 @@ describe('#end', function() {
 					startTime: '23:46',
 					minutesAsleep: '355'
 				}
-			}
+			};
 		});
 
 		it('should be a moment object', () => {
@@ -115,12 +113,11 @@ describe('#end', function() {
 			let result = methods.end.call(sleepData);
 			expect(result.get('minute')).to.equal(41);
 		});
-
 	});
 });
 
-describe('#summary', function() {
-	describe('with missing awakeningsCount', function() {
+describe('#summary', () => {
+	describe('with missing awakeningsCount', () => {
 		let sleepData;
 
 		beforeEach(() => {
@@ -132,7 +129,7 @@ describe('#summary', function() {
 					minutesAsleep: '355',
 					efficiency: '94'
 				}
-			}
+			};
 		});
 
 		it('should have the correct format', () => {
@@ -141,7 +138,7 @@ describe('#summary', function() {
 		});
 	});
 
-	describe('with normal data', function() {
+	describe('with normal data', () => {
 		let sleepData;
 
 		beforeEach(() => {
@@ -153,7 +150,7 @@ describe('#summary', function() {
 					minutesAsleep: '355',
 					efficiency: '94'
 				}
-			}
+			};
 		});
 
 		it('should have the correct format', () => {
