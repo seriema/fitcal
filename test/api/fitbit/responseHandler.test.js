@@ -95,4 +95,8 @@ describe('responseHandler', () => {
 			});
 		});
 	});
+
+	describe('#_refreshRefreshToken', () => {
+		// TODO: not sure how to wrap client id and token, to do these recover requests... VACATION TIME NOW!
+	});
 });
