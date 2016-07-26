@@ -37,10 +37,29 @@
     "xo": "^0.16.0"
   },
   "xo": {
-	"rules": {
-	  "no-warning-comments": "off",
-	  "filename-case": "off",
-	  "camelcase": ["error", { "properties": "never" }]
-	}
+    "envs": [
+      "node"
+    ],
+    "rules": {
+      "no-warning-comments": "off",
+      "xo/filename-case": "off",
+      "camelcase": [
+        "error",
+        {
+          "properties": "never"
+        }
+      ]
+    },
+    "overrides": [
+      {
+        "files": "test/**/*.js",
+        "rules": {
+          "no-unused-expressions": "off"
+        },
+        "envs": [
+          "mocha"
+        ]
+      }
+    ]
   }
 }

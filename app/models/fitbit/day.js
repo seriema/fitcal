@@ -59,14 +59,14 @@ function getNumber(value) {
 	return parseInt(value, 10);
 }
 
-function startCalc (dateTime, startTime) {
+function startCalc(dateTime, startTime) {
 	/* "dateTime": "2015-10-22", "value": "01:13" */
 	if (!startTime) {
 		return null; // Fitbit spams the logs with no data
 	}
 
 	// TODO: Should probably add minutesToFallAsleep?
-    var format = `${DATEFORMAT}_hh:mm`; // Assuming Fitbit uses AM/PM, so it's 'hh'. For 24h time use 'HH'.
+	var format = `${DATEFORMAT}_hh:mm`; // Assuming Fitbit uses AM/PM, so it's 'hh'. For 24h time use 'HH'.
 	var dateString = dateTime + '_' + startTime;
 	var date = moment.tz(dateString, format, TIMEZONE);
 
