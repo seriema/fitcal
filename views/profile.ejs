@@ -13,8 +13,23 @@
 
 	<div class="page-header text-center">
 		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
-		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+		<p><a href="/logout" class="btn btn-default btn-sm">Logout</a></p>
 	</div>
+
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<form>
+				<fieldset disabled>
+					<div class="form-group">
+						<label for="calendarUrl"><i class="fa fa-calendar" aria-hidden="true"></i> Your calendar URL:</label>
+						<input type="text" class="form-control" readonly id="calendarUrl" value="<%= user.calendarUrl() %>">
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<hr>
 
 	<div class="row">
 
@@ -75,7 +90,6 @@
 
 					<p>
 						<a href="/import/fitbit" class="btn btn-default">Import data</a>
-						<a href="/export/calendar" class="btn btn-default">Export calendar</a>
 					</p>
 					<p>
 						<a href="/unlink/fitbit" class="btn btn-primary">Unlink</a>

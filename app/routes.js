@@ -1,6 +1,7 @@
 // var http = require('http');
 var fitbit = require('./api/fitbit/fitbit');
 var calendar = require('./api/calendar');
+var User = require('./models/user');
 
 module.exports = function (app, passport) {
 	// =====================================
@@ -44,13 +45,16 @@ module.exports = function (app, passport) {
 	// =====================================
 	// CALENDAR EXPORT SECTION =============
 	// =====================================
-	app.get('/export/calendar', function (req, res) {
-		var user = req.user;
-		if (!user || !user.fitbit) { // TODO: The request will come from Google Calendar etc so it won't be a logged in user. Generate a unique URL instead?
-			return res.render('error.ejs', 'You need to be logged in and have linked your account with Fitbit.');
-		}
+	app.get('/calendar/:userId', function (req, res) {
+		var userId = req.params.userId;
+		User.findOne({'app.userId': userId}, function (err, user) {
+			if (err || !user) {
+				return res.status(404);
+			}
 
-		calendar.generate(user, res);
+			calendar.generate(user, res);
+		});
+
 	});
 
 // =============================================================================
