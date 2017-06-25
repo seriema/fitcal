@@ -11,10 +11,6 @@ var userSchema = new mongoose.Schema({
 	app: {
 		userId       : { type: String, default: shortid.generate() }
 	},
-	local            : {
-		email        : String,
-		password     : String
-	},
 	facebook         : {
 		id           : String,
 		token        : String,
@@ -33,11 +29,6 @@ var userSchema = new mongoose.Schema({
 // generating a hash
 userSchema.methods.generateHash = function (password) {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
-
-// checking if password is valid
-userSchema.methods.validPassword = function (password) {
-	return bcrypt.compareSync(password, this.local.password);
 };
 
 userSchema.methods.calendarUrl = function () {

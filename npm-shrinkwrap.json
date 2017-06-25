@@ -1714,11 +1714,6 @@
       "from": "passport-fitbit-oauth2@>=1.0.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/passport-fitbit-oauth2/-/passport-fitbit-oauth2-1.0.2.tgz"
     },
-    "passport-local": {
-      "version": "1.0.0",
-      "from": "passport-local@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/passport-local/-/passport-local-1.0.0.tgz"
-    },
     "passport-oauth2": {
       "version": "1.4.0",
       "from": "passport-oauth2@>=1.0.0 <2.0.0",
