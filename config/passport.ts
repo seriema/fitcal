@@ -1,12 +1,13 @@
-import { Strategy as LocalStrategy } from "passport-local";
+import * as LocalStrategy from 'passport-local';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-import { Strategy as FitbitStrategy } from 'passport-fitbit-oauth2';
+//import { FitbitOAuth2Strategy as FitbitStrategy } from 'passport-fitbit-oauth2';
+let FitbitStrategy = require('passport-fitbit-oauth2');
 
 // load up the user model
 import { User } from '../app/models/user';
 
 // load the auth variables
-var configAuth = require('./auth');
+import { auth as configAuth } from './auth';
 
 export function passport(passport) {
 
@@ -198,7 +199,7 @@ export function passport(passport) {
     // FITBIT STRATEGY =========================================================
     // =========================================================================
 
-    passport.use(new FitbitStrategy({
+    passport.use(new FitbitStrategy.FitbitOAuth2Strategy({
             clientID        : configAuth.fitbitAuth.clientID,
             clientSecret    : configAuth.fitbitAuth.clientSecret,
           	callbackURL     : configAuth.fitbitAuth.callbackURL,

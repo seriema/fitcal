@@ -2,6 +2,114 @@
   "name": "fitcal",
   "version": "1.0.0",
   "dependencies": {
+    "@types/bcrypt-nodejs": {
+      "version": "0.0.30",
+      "from": "@types/bcrypt-nodejs@latest",
+      "resolved": "https://registry.npmjs.org/@types/bcrypt-nodejs/-/bcrypt-nodejs-0.0.30.tgz",
+      "dev": true
+    },
+    "@types/body-parser": {
+      "version": "1.16.4",
+      "from": "@types/body-parser@latest",
+      "resolved": "https://registry.npmjs.org/@types/body-parser/-/body-parser-1.16.4.tgz",
+      "dev": true
+    },
+    "@types/bson": {
+      "version": "1.0.3",
+      "from": "@types/bson@*",
+      "resolved": "https://registry.npmjs.org/@types/bson/-/bson-1.0.3.tgz",
+      "dev": true
+    },
+    "@types/connect-flash": {
+      "version": "0.0.31",
+      "from": "@types/connect-flash@latest",
+      "resolved": "https://registry.npmjs.org/@types/connect-flash/-/connect-flash-0.0.31.tgz",
+      "dev": true
+    },
+    "@types/cookie-parser": {
+      "version": "1.3.30",
+      "from": "@types/cookie-parser@latest",
+      "resolved": "https://registry.npmjs.org/@types/cookie-parser/-/cookie-parser-1.3.30.tgz",
+      "dev": true
+    },
+    "@types/express": {
+      "version": "4.0.36",
+      "from": "@types/express@*",
+      "resolved": "https://registry.npmjs.org/@types/express/-/express-4.0.36.tgz",
+      "dev": true
+    },
+    "@types/express-serve-static-core": {
+      "version": "4.0.48",
+      "from": "@types/express-serve-static-core@*",
+      "resolved": "https://registry.npmjs.org/@types/express-serve-static-core/-/express-serve-static-core-4.0.48.tgz",
+      "dev": true
+    },
+    "@types/express-session": {
+      "version": "1.15.0",
+      "from": "@types/express-session@latest",
+      "resolved": "https://registry.npmjs.org/@types/express-session/-/express-session-1.15.0.tgz",
+      "dev": true
+    },
+    "@types/mime": {
+      "version": "1.3.1",
+      "from": "@types/mime@*",
+      "resolved": "https://registry.npmjs.org/@types/mime/-/mime-1.3.1.tgz",
+      "dev": true
+    },
+    "@types/moment": {
+      "version": "2.13.0",
+      "from": "@types/moment@latest",
+      "resolved": "https://registry.npmjs.org/@types/moment/-/moment-2.13.0.tgz",
+      "dev": true
+    },
+    "@types/mongodb": {
+      "version": "2.2.6",
+      "from": "@types/mongodb@latest",
+      "resolved": "https://registry.npmjs.org/@types/mongodb/-/mongodb-2.2.6.tgz",
+      "dev": true
+    },
+    "@types/mongoose": {
+      "version": "4.7.18",
+      "from": "@types/mongoose@latest",
+      "resolved": "https://registry.npmjs.org/@types/mongoose/-/mongoose-4.7.18.tgz",
+      "dev": true
+    },
+    "@types/morgan": {
+      "version": "1.7.32",
+      "from": "@types/morgan@latest",
+      "resolved": "https://registry.npmjs.org/@types/morgan/-/morgan-1.7.32.tgz",
+      "dev": true
+    },
+    "@types/node": {
+      "version": "8.0.2",
+      "from": "@types/node@>=8.0.2 <9.0.0",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-8.0.2.tgz",
+      "dev": true
+    },
+    "@types/passport": {
+      "version": "0.3.3",
+      "from": "@types/passport@latest",
+      "resolved": "https://registry.npmjs.org/@types/passport/-/passport-0.3.3.tgz",
+      "dev": true
+    },
+    "@types/passport-facebook": {
+      "version": "2.1.4",
+      "from": "@types/passport-facebook@latest",
+      "resolved": "https://registry.npmjs.org/@types/passport-facebook/-/passport-facebook-2.1.4.tgz",
+      "dev": true
+    },
+    "@types/q": {
+      "version": "1.0.1",
+      "from": "@types/q@latest",
+      "resolved": "https://registry.npmjs.org/@types/q/-/q-1.0.1.tgz",
+      "dev": true
+    },
+    "@types/serve-static": {
+      "version": "1.7.31",
+      "from": "@types/serve-static@*",
+      "resolved": "https://registry.npmjs.org/@types/serve-static/-/serve-static-1.7.31.tgz",
+      "dev": true
+    },
     "accepts": {
       "version": "1.3.3",
       "from": "accepts@>=1.3.3 <1.4.0",
@@ -59,7 +167,7 @@
     },
     "bcrypt-nodejs": {
       "version": "0.0.3",
-      "from": "bcrypt-nodejs@latest",
+      "from": "bcrypt-nodejs@0.0.3",
       "resolved": "https://registry.npmjs.org/bcrypt-nodejs/-/bcrypt-nodejs-0.0.3.tgz"
     },
     "bl": {
@@ -86,7 +194,7 @@
     },
     "body-parser": {
       "version": "1.15.2",
-      "from": "body-parser@latest",
+      "from": "body-parser@>=1.15.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/body-parser/-/body-parser-1.15.2.tgz"
     },
     "boom": {
@@ -126,7 +234,7 @@
     },
     "connect-flash": {
       "version": "0.1.1",
-      "from": "connect-flash@latest",
+      "from": "connect-flash@>=0.1.1 <0.2.0",
       "resolved": "https://registry.npmjs.org/connect-flash/-/connect-flash-0.1.1.tgz"
     },
     "content-disposition": {
@@ -146,7 +254,7 @@
     },
     "cookie-parser": {
       "version": "1.4.3",
-      "from": "cookie-parser@latest",
+      "from": "cookie-parser@>=1.4.3 <2.0.0",
       "resolved": "https://registry.npmjs.org/cookie-parser/-/cookie-parser-1.4.3.tgz"
     },
     "cookie-signature": {
@@ -209,7 +317,8 @@
     "ecc-jsbn": {
       "version": "0.1.1",
       "from": "ecc-jsbn@>=0.1.1 <0.2.0",
-      "resolved": "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz"
+      "resolved": "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz",
+      "optional": true
     },
     "ee-first": {
       "version": "1.1.1",
@@ -248,12 +357,12 @@
     },
     "express": {
       "version": "4.14.0",
-      "from": "express@latest",
+      "from": "express@>=4.14.0 <5.0.0",
       "resolved": "https://registry.npmjs.org/express/-/express-4.14.0.tgz"
     },
     "express-session": {
       "version": "1.14.0",
-      "from": "express-session@latest",
+      "from": "express-session@>=1.14.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/express-session/-/express-session-1.14.0.tgz"
     },
     "extend": {
@@ -278,7 +387,7 @@
     },
     "form-data": {
       "version": "1.0.0-rc4",
-      "from": "form-data@>=1.0.0-rc3 <1.1.0",
+      "from": "form-data@>=1.0.0-rc4 <1.1.0",
       "resolved": "https://registry.npmjs.org/form-data/-/form-data-1.0.0-rc4.tgz"
     },
     "forwarded": {
@@ -355,7 +464,7 @@
     },
     "ical-generator": {
       "version": "0.2.7",
-      "from": "ical-generator@latest",
+      "from": "ical-generator@>=0.2.7 <0.3.0",
       "resolved": "https://registry.npmjs.org/ical-generator/-/ical-generator-0.2.7.tgz"
     },
     "iconv-lite": {
@@ -365,7 +474,7 @@
     },
     "inherits": {
       "version": "2.0.1",
-      "from": "inherits@>=2.0.1 <2.1.0",
+      "from": "inherits@2.0.1",
       "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz"
     },
     "ipaddr.js": {
@@ -401,12 +510,14 @@
     "jodid25519": {
       "version": "1.0.2",
       "from": "jodid25519@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/jodid25519/-/jodid25519-1.0.2.tgz"
+      "resolved": "https://registry.npmjs.org/jodid25519/-/jodid25519-1.0.2.tgz",
+      "optional": true
     },
     "jsbn": {
       "version": "0.1.0",
       "from": "jsbn@>=0.1.0 <0.2.0",
-      "resolved": "https://registry.npmjs.org/jsbn/-/jsbn-0.1.0.tgz"
+      "resolved": "https://registry.npmjs.org/jsbn/-/jsbn-0.1.0.tgz",
+      "optional": true
     },
     "json-schema": {
       "version": "0.2.2",
@@ -470,7 +581,7 @@
     },
     "moment-timezone": {
       "version": "0.5.4",
-      "from": "moment-timezone@latest",
+      "from": "moment-timezone@>=0.5.4 <0.6.0",
       "resolved": "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.5.4.tgz"
     },
     "mongodb": {
@@ -490,7 +601,7 @@
     },
     "morgan": {
       "version": "1.7.0",
-      "from": "morgan@latest",
+      "from": "morgan@>=1.7.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/morgan/-/morgan-1.7.0.tgz"
     },
     "mpath": {
@@ -562,12 +673,12 @@
     },
     "passport": {
       "version": "0.3.2",
-      "from": "passport@latest",
+      "from": "passport@>=0.3.2 <0.4.0",
       "resolved": "https://registry.npmjs.org/passport/-/passport-0.3.2.tgz"
     },
     "passport-facebook": {
       "version": "2.1.1",
-      "from": "passport-facebook@latest",
+      "from": "passport-facebook@>=2.1.1 <3.0.0",
       "resolved": "https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.1.1.tgz"
     },
     "passport-fitbit-oauth2": {
@@ -622,7 +733,7 @@
     },
     "q": {
       "version": "1.4.1",
-      "from": "q@latest",
+      "from": "q@>=1.4.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/q/-/q-1.4.1.tgz"
     },
     "qs": {
@@ -699,7 +810,7 @@
     },
     "simple-oauth2": {
       "version": "0.7.0",
-      "from": "simple-oauth2@latest",
+      "from": "simple-oauth2@>=0.7.0 <0.8.0",
       "resolved": "https://registry.npmjs.org/simple-oauth2/-/simple-oauth2-0.7.0.tgz"
     },
     "sliced": {
@@ -726,7 +837,7 @@
     },
     "statuses": {
       "version": "1.3.0",
-      "from": "statuses@>=1.3.0 <1.4.0",
+      "from": "statuses@>=1.3.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/statuses/-/statuses-1.3.0.tgz"
     },
     "string_decoder": {
@@ -762,7 +873,8 @@
     "tweetnacl": {
       "version": "0.13.3",
       "from": "tweetnacl@>=0.13.0 <0.14.0",
-      "resolved": "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.13.3.tgz"
+      "resolved": "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.13.3.tgz",
+      "optional": true
     },
     "type-is": {
       "version": "1.6.13",
@@ -781,7 +893,7 @@
     },
     "unpipe": {
       "version": "1.0.0",
-      "from": "unpipe@>=1.0.0 <1.1.0",
+      "from": "unpipe@1.0.0",
       "resolved": "https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz"
     },
     "util-deprecate": {

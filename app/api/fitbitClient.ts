@@ -1,19 +1,25 @@
 // Taken from https://github.com/lukasolson/fitbit-node
 // The idea is to rewrite it to something simpler and more standard.
 
-import { OAuth2 } from 'simple-oauth2';
+import * as OAuth2 from 'simple-oauth2';
 import * as Q from 'q';
 import { Request } from 'request';
 import { auth as configAuth } from './../../config/auth';
 
 function FitbitApiClient() {
     this.oauth2 = OAuth2({
-        clientID        : configAuth.fitbitAuth.clientID,
-        clientSecret    : configAuth.fitbitAuth.clientSecret,
-        site: 'https://api.fitbit.com/',
-        authorizationPath: 'oauth2/authorize',
-        tokenPath: 'oauth2/token',
-        useBasicAuthorizationHeader: true
+        client: {
+            id        : configAuth.fitbitAuth.clientID,
+            secret    : configAuth.fitbitAuth.clientSecret
+        },
+        auth: {
+            tokenHost: 'https://api.fitbit.com/',
+            authorizePath: 'oauth2/authorize',
+            tokenPath: 'oauth2/token',            
+        },
+        options: {
+            useBasicAuthorizationHeader: true
+        }
     });
 }
 

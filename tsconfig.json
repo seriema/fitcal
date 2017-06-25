@@ -5,7 +5,6 @@
     "target": "es5",
     "emitBOM": true,
     "newLine": "LF",
-    "outDir": "built",
     "sourceMap": true,
     "alwaysStrict": false,
     "noImplicitUseStrict": true,
@@ -13,9 +12,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "baseUrl": ".",
-    "paths": {
-      "*" : ["./app/*"]
-    },
     "traceResolution": false
   },
   "exclude": [ "node_modules" ]

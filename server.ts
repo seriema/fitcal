@@ -3,13 +3,14 @@ var app = express();
 
 import * as mongoose from "mongoose";
 import * as passport from "passport";
-import { flash } from "connect-flash";
+//import * as flash from "connect-flash";
+let flash = require("connect-flash");
 var port = process.env.PORT || 8080;
 
-import { morgan } from "morgan";
-import { cookieParser } from "cookie-parser";
-import { bodyParser } from "body-parser";
-import { session } from "express-session";
+import * as morgan from "morgan";
+import * as cookieParser from "cookie-parser";
+import * as bodyParser from "body-parser";
+import * as session from "express-session";
 
 import { database as configDB } from "./config/database";
 import { passport as configPassport } from './config/passport';
