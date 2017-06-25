@@ -1,9 +1,27 @@
-import mongoose = require('mongoose');
-import moment = require('moment-timezone');
+import * as mongoose from 'mongoose';
+import { moment } from 'moment-timezone';
+
 const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
 const DATEFORMAT = 'YYYY-MM-DD';
 
-var sleepSchema = mongoose.Schema({
+export interface ISleep {
+    fitbit              : {
+        id              : string
+    },
+    dateTime            : string, // ID // TODO: Should specify the format somewhere? For easy parsing with momentjs
+    raw                 : { // TODO: Call this fitbit.raw?
+        startTime           : string,
+        timeInBed           : string,
+        minutesAsleep       : string,
+        awakeningsCount     : string,
+        minutesAwake        : string,
+        minutesToFallAsleep : string,
+        minutesAfterWakeup  : string,
+        efficiency          : string
+    }
+};
+
+export var SleepSchema: mongoose.Schema = new mongoose.Schema({
 
     fitbit              : {
         id              : String
@@ -22,7 +40,7 @@ var sleepSchema = mongoose.Schema({
 });
 
 // methods ======================
-function getNumber(value) {
+function getNumber(value) : number {
     if (value === "0" || !value)
         return null; // Fitbit spams the logs with no data
 
@@ -30,7 +48,7 @@ function getNumber(value) {
 }
 
 // Convenience methods for the calendar export.
-sleepSchema.methods.start = function () {
+SleepSchema.methods.start = function () : moment.Moment {
     /* "dateTime": "2015-10-22", "value": "01:13" */
     var value = this.raw.startTime; // TODO: Use virtual?
     if (!value)
@@ -47,11 +65,11 @@ sleepSchema.methods.start = function () {
 
     return date;
 };
-sleepSchema.methods.end = function () {
+SleepSchema.methods.end = function () : any {
     var date = this.start().clone().add(this.minutesAsleep, 'minute');
     return date;
 };
-sleepSchema.methods.summary = function () {
+SleepSchema.methods.summary = function () : string {
     var minAsleep = moment.duration(this.minutesAsleep, 'minutes');
     var awakeCount = this.awakeningsCount === undefined ? 'unknown' : this.awakeningsCount; // 0 is a valid number
     //var awakeText = this.awakeningsCount === undefined ? '' : `${this.awakeningsCount} times awake`; // 0 is a valid number
@@ -63,7 +81,7 @@ sleepSchema.methods.summary = function () {
 /*sleepSchema.methods.minutesAsleep = function () {
     return getNumber(this.raw.minutesAsleep);
 };*/
-sleepSchema.virtual('minutesAsleep').get(function () {
+SleepSchema.virtual('minutesAsleep').get(function () : number {
     return getNumber(this.raw.minutesAsleep);
 });
 
@@ -71,7 +89,7 @@ sleepSchema.virtual('minutesAsleep').get(function () {
 /*sleepSchema.methods.awakeningsCounts = function () {
     return getNumber(this.raw.awakeningsCount);
 };*/
-sleepSchema.virtual('awakeningsCount').get(function () {
+SleepSchema.virtual('awakeningsCount').get(function () : number {
     return getNumber(this.raw.awakeningsCount);
 });
 
@@ -79,7 +97,7 @@ sleepSchema.virtual('awakeningsCount').get(function () {
 /*sleepSchema.methods.efficiency = function () {
     return getNumber(this.raw.efficiency);
 };*/
-sleepSchema.virtual('efficiency').get(function () {
+SleepSchema.virtual('efficiency').get(function () : number {
     return getNumber(this.raw.efficiency);
 });
 
@@ -140,6 +158,14 @@ sleepSchema.virtual('efficiency').get(function () {
 
  */
 
+export interface ISleepModel extends ISleep, mongoose.Document {
+  start(): moment.Moment;
+  end(): any;
+  summary(): string;
+  minutesAsleep(): number;
+  awakeningsCount(): number;
+  efficiency(): number;
+}
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('Sleep', sleepSchema);
+export const Sleep = mongoose.model<ISleepModel>('Sleep', SleepSchema);

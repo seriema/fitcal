@@ -1,7 +1,8 @@
-import q = require('q');
-import FitbitApiClient = require("./fitbitClient");
+import * as q from 'q';
+import { FitbitApiClient } from "./fitbitClient";
 let client = new FitbitApiClient();
-import Sleep = require('../models/fitbit/sleep');
+import { Sleep } from '../models/fitbit/sleep';
+import { IUser } from '../models/user';
 
 
 const resources = {
@@ -22,7 +23,7 @@ const timeSpan = {
     period: '7d'
 };
 
-function importSleep(user, res) {
+export function importSleep(user : IUser, res) {
     function updateCategory(categoryData) {
         function updateCategoryDate(category, dateData) {
             var categoryDeferred = q.defer();
@@ -105,7 +106,7 @@ function importSleep(user, res) {
             var funcs = categoryResults.map(function (categoryResult) {
                 return updateCategory.bind(null, categoryResult);
             });
-            var result = q(0);
+            var result = q({});
             funcs.forEach(function (f) {
                 result = result.then(f);
             });
@@ -118,7 +119,3 @@ function importSleep(user, res) {
             res.render('error.ejs', {error});
         });
 }
-
-module.exports = {
-    importSleep
-};

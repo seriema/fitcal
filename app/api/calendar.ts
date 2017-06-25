@@ -1,10 +1,18 @@
-import ical = require('ical-generator');
-import q = require('q');
-import Sleep = require('../models/fitbit/sleep');
-import siteConfig = require('./../../config/site');
+import { ical } from 'ical-generator';
+import * as q from 'q';
+import { Sleep } from '../models/fitbit/sleep';
+import { IUser } from '../models/user';
+import { site as siteConfig } from './../../config/site';
 
-function getSleep(user) {
-    var sleepDeferred = q.defer();
+class SleepData {
+    start: Date; // TODO: I'd like the convenience methods start/end to return the correct format, but end uses start internally so I need to have the toDate() call here for now.
+    end: Date;
+    summary: string;
+    description: string;
+}
+
+function getSleep(user : IUser) : q.Promise<SleepData[]> {
+    var sleepDeferred = q.defer<SleepData[]>();
     var query = {
         'fitbit.id': user.fitbit.id
     };
@@ -18,7 +26,7 @@ function getSleep(user) {
         if (!sleepData)
             return sleepDeferred.reject("There doesn't seem to be any sleep data for you.");
 
-        var events = [];
+        var events : SleepData[] = [];
         sleepData.forEach(function (sleep) {
             var start = sleep.start();
             if (!start)
@@ -38,7 +46,7 @@ function getSleep(user) {
     return sleepDeferred.promise;
 }
 
-function exportSleep(user, res) {
+function exportSleep(user : IUser, res) : void {
     const TIMEZONE = 'Europe/Stockholm'; // TODO: This should be on the User model
 
     // - Setup iCal -
@@ -59,6 +67,6 @@ function exportSleep(user, res) {
         });
 }
 
-module.exports = {
-    generate: exportSleep
+export {
+    exportSleep as generate
 };

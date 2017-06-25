@@ -1,18 +1,18 @@
-import express = require('express');
+import * as express from 'express';
 var app = express();
 
-import mongoose = require("mongoose");
-import passport = require("passport");
-import flash = require("connect-flash");
+import * as mongoose from "mongoose";
+import * as passport from "passport";
+import { flash } from "connect-flash";
 var port = process.env.PORT || 8080;
 
-import morgan = require("morgan");
-import cookieParser = require("cookie-parser");
-import bodyParser = require("body-parser");
-import session = require("express-session");
+import { morgan } from "morgan";
+import { cookieParser } from "cookie-parser";
+import { bodyParser } from "body-parser";
+import { session } from "express-session";
 
-import configDB = require("./config/database");
-import configPassport = require('./config/passport');
+import { database as configDB } from "./config/database";
+import { passport as configPassport } from './config/passport';
 configPassport(passport); // pass passport for configuration
 
 

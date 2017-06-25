@@ -1,10 +1,10 @@
 // Taken from https://github.com/lukasolson/fitbit-node
 // The idea is to rewrite it to something simpler and more standard.
 
-import OAuth2 = require('simple-oauth2');
-import Q = require('q');
-import Request = require('request');
-import configAuth = require('./../../config/auth');
+import { OAuth2 } from 'simple-oauth2';
+import * as Q from 'q';
+import { Request } from 'request';
+import { auth as configAuth } from './../../config/auth';
 
 function FitbitApiClient() {
     this.oauth2 = OAuth2({
@@ -162,7 +162,7 @@ FitbitApiClient.prototype = {
 };
 
 function getUrl(path, userId) {
-    return url = 'https://api.fitbit.com/1/user/' + (userId || '-') + path;
+    return 'https://api.fitbit.com/1/user/' + (userId || '-') + path;
 }
 
-module.exports = FitbitApiClient;
+export { FitbitApiClient };

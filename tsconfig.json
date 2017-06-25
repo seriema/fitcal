@@ -4,8 +4,19 @@
     "module": "commonjs",
     "target": "es5",
     "emitBOM": true,
-    "newLine": "lf",
+    "newLine": "LF",
     "outDir": "built",
-    "sourceMap": true
-  }
+    "sourceMap": true,
+    "alwaysStrict": false,
+    "noImplicitUseStrict": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "paths": {
+      "*" : ["./app/*"]
+    },
+    "traceResolution": false
+  },
+  "exclude": [ "node_modules" ]
 }

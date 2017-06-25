@@ -1,16 +1,14 @@
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-//import { Strategy as FitbitStrategy } from 'passport-fitbit-oauth2';
-import FitbitStrategy = require('passport-fitbit-oauth2');
+import { Strategy as FitbitStrategy } from 'passport-fitbit-oauth2';
 
 // load up the user model
-import User = require('../app/models/user');
+import { User } from '../app/models/user';
 
 // load the auth variables
 var configAuth = require('./auth');
 
-// expose this function to our app using module.exports
-export = function(passport) {
+export function passport(passport) {
 
     // =========================================================================
     // passport session setup ==================================================
@@ -46,7 +44,7 @@ export = function(passport) {
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.email' :  email }, function(err, user) {
+        User.findOne({ 'local.email' :  email }, function(err, user : any) {
             // if there are any errors, return the error before anything else
             if (err)
                 return done(err);

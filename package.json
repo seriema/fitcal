@@ -30,5 +30,13 @@
   "engines": {
     "node": "~6.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/bcrypt-nodejs": "0.0.30",
+    "@types/moment": "^2.13.0",
+    "@types/mongodb": "^2.2.6",
+    "@types/mongoose": "^4.7.18",
+    "@types/node": "^8.0.2",
+    "@types/passport": "^0.3.3",
+    "@types/q": "^1.0.1"
+  }
 }

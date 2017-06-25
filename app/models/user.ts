@@ -1,9 +1,27 @@
-import mongoose = require('mongoose');
-import bcrypt   = require('bcrypt-nodejs');
+import { Document, Schema, model } from 'mongoose';
+import { compareSync, genSaltSync, hashSync } from 'bcrypt-nodejs';
+
+export interface IUser {
+    local            : {
+        email        : string,
+        password     : string,
+    },
+    facebook         : {
+        id           : string,
+        token        : string,
+        email        : string,
+        name         : string
+    },
+    fitbit           : {
+        id           : string,
+        token        : string,
+        name         : string
+    }
+};
 
 // define the schema for our user model
-let userSchema : mongoose.Schema = new mongoose.Schema({
 
+export var UserSchema: Schema = new Schema({
     local            : {
         email        : String,
         password     : String,
@@ -19,21 +37,25 @@ let userSchema : mongoose.Schema = new mongoose.Schema({
         token        : String,
         name         : String
     }
-
 });
 
 // methods ======================
 // generating a hash
-userSchema.methods.generateHash = function(password:string) {
-    var salt = bcrypt.genSaltSync(8);
-    return bcrypt.hashSync(password, salt);
+UserSchema.methods.generateHash = function(password:string) {
+    var salt = genSaltSync(8);
+    return hashSync(password, salt);
 };
 
 // checking if password is valid
-userSchema.methods.validPassword = function(password:string) {
-    return bcrypt.compareSync(password, this.local.password);
+UserSchema.methods.validPassword = function(password:string) {
+    return compareSync(password, this.local.password);
 };
 
+
+export interface IUserModel extends IUser, Document {
+  generateHash(password:string): string;
+  validPassword(password:string): boolean;
+}
+
 // create the model for users and expose it to our app
-let x = mongoose.model('User', userSchema);
-export { x };
+export const User = model<IUserModel>('User', UserSchema);
