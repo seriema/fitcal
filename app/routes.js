@@ -1,8 +1,3 @@
-// var http = require('http');
-var fitbit = require('./api/fitbit/fitbit');
-var calendar = require('./api/calendar');
-var User = require('./models/user');
-
 module.exports = function (app, passport) {
 	// =====================================
 	// HOME PAGE (with login links) ========
@@ -34,27 +29,14 @@ module.exports = function (app, passport) {
 	// DATA IMPORT SECTION =================
 	// =====================================
 	app.get('/import/fitbit', function (req, res) {
-		var user = req.user;
-		if (!user || !user.fitbit) {
-			return res.render('error.ejs', 'You need to be logged in and have linked your account with Fitbit.');
-		}
-
-		fitbit.importTimeSeries(user, res);
+		// TODO
 	});
 
 	// =====================================
 	// CALENDAR EXPORT SECTION =============
 	// =====================================
 	app.get('/calendar/:userId', function (req, res) {
-		var userId = req.params.userId;
-		User.findOne({'app.userId': userId}, function (err, user) {
-			if (err || !user) {
-				return res.status(404);
-			}
-
-			calendar.generate(user, res);
-		});
-
+		// TODO
 	});
 
 // =============================================================================
