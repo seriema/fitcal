@@ -3,7 +3,7 @@
 import { Document, Schema, model } from 'mongoose';
 import { genSaltSync, hashSync } from 'bcrypt-nodejs';
 import { site as siteConfig } from './../../config/site';
-var shortid = require('shortid');
+import * as shortid from 'shortid';
 
 export interface IUser {
 	app: {

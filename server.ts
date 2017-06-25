@@ -8,6 +8,8 @@ import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
 import * as session from "express-session";
 
+import { routes } from './app/routes.js';
+
 import { database as configDB } from "./config/database";
 import { passport as configPassport } from './config/passport';
 
@@ -37,7 +39,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+routes(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);

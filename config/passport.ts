@@ -105,7 +105,7 @@ export function passport(passport) {
 	// FITBIT STRATEGY =========================================================
 	// =========================================================================
 
-	passport.use(new FitbitStrategy({
+	passport.use(new FitbitStrategy.FitbitOAuth2Strategy({
 		clientID: configAuth.fitbitAuth.clientID,
 		clientSecret: configAuth.fitbitAuth.clientSecret,
 		callbackURL: configAuth.fitbitAuth.callbackURL,
