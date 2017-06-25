@@ -1,22 +1,22 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var flash = require('connect-flash');
+import * as express from 'express';
+import * as mongoose from "mongoose";
+import * as passport from "passport";
+let flash = require("connect-flash"); // No TS typings yet
 
-var morgan = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session = require('express-session');
+import * as morgan from "morgan";
+import * as cookieParser from "cookie-parser";
+import * as bodyParser from "body-parser";
+import * as session from "express-session";
 
-var configDB = require('./config/database.js');
+import { database as configDB } from "./config/database";
+import { passport as configPassport } from './config/passport';
 
-var app = express();
-var port = process.env.PORT || 8080;
+let app = express();
+let port = process.env.PORT || 8080;
 
 // configuration ===============================================================
+configPassport(passport); // pass passport for configuration
 mongoose.connect(configDB.url); // connect to our database
-
-require('./config/passport')(passport); // pass passport for configuration
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console

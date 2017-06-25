@@ -1,13 +1,30 @@
 /* eslint key-spacing: ["off"] */
 
-var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
+import { Document, Schema, model } from 'mongoose';
+import { genSaltSync, hashSync } from 'bcrypt-nodejs';
+import { site as siteConfig } from './../../config/site';
 var shortid = require('shortid');
-var siteConfig = require('./../../config/site');
+
+export interface IUser {
+	app: {
+		userId       : string;
+	};
+	facebook         : {
+		id           : string;
+		token        : string;
+		email        : string;
+		name         : string;
+    };
+	fitbit           : {
+		id           : string;
+		token        : string;
+		name         : string;
+	};
+};
 
 // define the schema for our user model
-var userSchema = new mongoose.Schema({
 
+export var UserSchema: Schema = new Schema({
 	app: {
 		userId       : { type: String, default: shortid.generate() }
 	},
@@ -22,18 +39,24 @@ var userSchema = new mongoose.Schema({
 		token        : String,
 		name         : String
 	}
-
 });
 
 // methods ======================
 // generating a hash
-userSchema.methods.generateHash = function (password) {
-	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+UserSchema.methods.generateHash = function(password:string) {
+	var salt = genSaltSync(8);
+	return hashSync(password, salt);
 };
 
-userSchema.methods.calendarUrl = function () {
+UserSchema.methods.calendarUrl = function () {
 	return `${siteConfig.domain}/calendar/${this.app.userId}`;
 };
 
+
+export interface IUserModel extends IUser, Document {
+	generateHash(password:string): string;
+	calendarUrl(): string;
+}
+
 // create the model for users and expose it to our app
-module.exports = mongoose.model('User', userSchema);
+export const User = model<IUserModel>('User', UserSchema);

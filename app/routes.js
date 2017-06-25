@@ -1,4 +1,4 @@
-module.exports = function (app, passport) {
+export function routes(app, passport) {
 	// =====================================
 	// HOME PAGE (with login links) ========
 	// =====================================

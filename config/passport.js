@@ -1,16 +1,16 @@
 /* eslint max-params: ["off"] */
 
-var FacebookStrategy = require('passport-facebook').Strategy;
-var FitbitStrategy = require('passport-fitbit-oauth2').FitbitOAuth2Strategy;
+import { Strategy as FacebookStrategy } from 'passport-facebook';
+//import { FitbitOAuth2Strategy as FitbitStrategy } from 'passport-fitbit-oauth2';
+let FitbitStrategy = require('passport-fitbit-oauth2'); // No TS typings yet
 
 // load up the user model
-var User = require('../app/models/user');
+import { User } from '../app/models/user';
 
 // load the auth variables
-var configAuth = require('./auth');
+import { auth as configAuth } from './auth';
 
-// expose this function to our app using module.exports
-module.exports = function (passport) {
+export function passport(passport) {
 	// =========================================================================
 	// passport session setup ==================================================
 	// =========================================================================
